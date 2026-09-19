@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner&amp;Picchi Diaries</title>
+
+  <!-- Google Fonts: Anek Bangla, Baloo Da 2, Hind Siliguri (Stylish Bengali Typography) & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;600;700;800&family=Baloo+Da+2:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Ambient Floating Background Blobs -->
+  <div class="ambient-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+    <div class="blob blob-5"></div>
+  </div>
+
+  <!-- Interactive Floating Hearts Canvas / Container -->
+  <div id="heart-particles-container" aria-hidden="true"></div>
+
+  <!-- Floating Navigation Bar -->
+  <header class="navbar-wrapper">
+    <nav class="navbar glass-card">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-heart">💖</span>
+        <span class="logo-text" id="nav-brand-names"><span class="logo-full">Partner&amp;Picchi Diaries</span><span class="logo-short">P&amp;P Diaries</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#story"><span class="link-full">আমাদের গল্প</span><span class="link-short">গল্প</span></a></li>
+        <li><a href="#moments"><span class="link-full">স্মৃতিগুলো</span><span class="link-short">স্মৃতি</span></a></li>
+        <li><a href="#dates"><span class="link-full">ভার্চুয়াল ডেট</span><span class="link-short">ডেট</span></a></li>
+        <li><a href="#dreams"><span class="link-full">স্বপ্নজাল</span><span class="link-short">স্বপ্ন</span></a></li>
+        <li><a href="#vibe"><span class="link-full">ভাইব ম্যাচ</span><span class="link-short">ভাইব</span></a></li>
+        <li><a href="#game"><span class="link-full">আর্কেড গেইম</span><span class="link-short">গেইম</span></a></li>
+      </ul>
+      <button id="sparkle-btn" class="pill-btn sparkle-pill" title="ভালোবাসার আনন্দ উদযাপন করুন!">
+        <span class="btn-icon">✨</span>
+        <span class="btn-text">উৎসব</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ==================== 1. HERO SECTION ==================== -->
+    <section id="hero" class="hero-section">
+      <div class="container hero-container">
+        
+        <div class="hero-badge reveal-fade">
+          <span class="badge-icon">✨</span>
+          <span class="badge-text">অটুট বন্ধুত্বের চিরন্তন বন্ধন</span>
+          <span class="badge-icon">✨</span>
+        </div>
+
+        <h1 class="hero-title reveal-fade" id="hero-title">
+          <span class="hero-brand-name" id="hero-brand-name">Partner&amp;Picchi Diaries</span>
+        </h1>
+
+        <p class="hero-subheadline reveal-fade" id="hero-subheadline">
+          "একটা বন্ধুত্বের গল্প, যেটা সময়ের সাথে আরও গাঢ় হয়েছে"
+        </p>
+
+        <!-- Live Friendship Countdown / Counter -->
+        <div class="counter-wrapper glass-card reveal-fade">
+          <div class="counter-header">
+            <span class="heart-pulse">❤️</span>
+            <h3 class="counter-title">একসাথে পথচলার ভালোবাসার মুহূর্ত</h3>
+            <span class="heart-pulse">❤️</span>
+          </div>
+
+          <div class="counter-grid">
+            <div class="counter-box">
+              <span class="counter-val" id="cnt-days">00</span>
+              <span class="counter-label">দিন</span>
+            </div>
+            <div class="counter-colon">:</div>
+            <div class="counter-box">
+              <span class="counter-val" id="cnt-hours">00</span>
+              <span class="counter-label">ঘণ্টা</span>
+            </div>
+            <div class="counter-colon">:</div>
+            <div class="counter-box">
+              <span class="counter-val" id="cnt-minutes">00</span>
+              <span class="counter-label">মিনিট</span>
+            </div>
+            <div class="counter-colon">:</div>
+            <div class="counter-box">
+              <span class="counter-val highlight" id="cnt-seconds">00</span>
+              <span class="counter-label">সেকেন্ড</span>
+            </div>
+          </div>
+
+          <div class="counter-footnote">
+            <span class="footnote-dot"></span>
+            <span id="counter-start-label">৯ আগস্ট ২০২৬ (রবিবার) থেকে আমাদের এই মিষ্টি বন্ধুত্বের শুরু</span>
+          </div>
+        </div>
+
+        <div class="hero-actions reveal-fade">
+          <a href="#story" class="pill-btn primary-btn">
+            <span>আমাদের গল্প পড়ুন</span>
+            <span class="btn-arrow">↓</span>
+          </a>
+          <a href="#moments" class="pill-btn secondary-btn">
+            <span>মেসেঞ্জার স্মৃতিগুলো</span>
+            <span class="btn-icon">💬</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 2. "OUR STORY BEGAN" SECTION ==================== -->
+    <section id="story" class="section story-section">
+      <div class="container">
+        
+        <div class="section-header reveal-fade">
+          <span class="section-pill-tag">📖 ডায়েরির সোনালী পাতা</span>
+          <h2 class="section-title">
+            আমাদের <span class="gradient-text">গল্প</span>
+            <span class="title-icon">✨</span>
+          </h2>
+          <p class="section-intro" id="story-intro-text">
+            স্মৃতির ডায়রীর পাতা উল্টালে এখনও জীবন্ত হয়ে ওঠে সেই প্রথম কথা, মেসেঞ্জার চ্যাটের খুনসুটি আর অকৃত্রিম আন্তরিকতা।
+          </p>
+        </div>
+
+        <!-- DIARY STAGE WRAPPER WITH 3D BOOK & CONTROLS -->
+        <div class="diary-swipe-hint" aria-hidden="true">
+          <span>👈 সোয়াইপ করুন অথবা তীর চিহ্নে চাপুন 👉</span>
+        </div>
+
+        <div class="diary-experience-wrapper reveal-fade">
+          
+          <!-- Navigation Arrow: Previous -->
+          <button id="diary-prev-btn" class="diary-nav-btn prev-leaf-btn glass-card" aria-label="Previous diary spread" title="আগের পাতা">
+            <span>❮</span>
+          </button>
+
+          <!-- The Realistic Open Vintage Book Viewport -->
+          <div class="open-diary-viewport" id="open-diary-viewport">
+            <div class="open-diary-book" id="open-diary-book">
+              <!-- Book Base with background image assets/diary-bg.png -->
+              <div class="diary-base-cover"></div>
+
+              <!-- Left Page Spread (Static Content for Current Spread) -->
+              <div class="diary-page-half left-page-half" id="diary-left-page">
+                <!-- Dynamically rendered left page content -->
+              </div>
+
+              <!-- Right Page Spread (Static Content Underneath Flipping Leaf) -->
+              <div class="diary-page-half right-page-half" id="diary-right-page">
+                <!-- Dynamically rendered right page content -->
+              </div>
+
+              <!-- 3D Turning Leaf Element -->
+              <div class="diary-flipping-leaf" id="diary-flipping-leaf" style="display: none;">
+                <!-- Front of Leaf (Current Right Page as it flips away) -->
+                <div class="leaf-face leaf-front" id="leaf-front-face"></div>
+                <!-- Back of Leaf (New Left Page as it lands on the left) -->
+                <div class="leaf-face leaf-back" id="leaf-back-face"></div>
+              </div>
+
+              <!-- Center Spine Shadow & Stitching Overlay -->
+              <div class="diary-center-spine" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <!-- Navigation Arrow: Next -->
+          <button id="diary-next-btn" class="diary-nav-btn next-leaf-btn glass-card" aria-label="Next diary spread" title="পরের পাতা">
+            <span>❯</span>
+          </button>
+
+        </div>
+
+        <!-- DIARY FOOTER CONTROLS & CHAPTER INFO -->
+        <div class="diary-footer-toolbar reveal-fade">
+          <div class="diary-chapter-info">
+            <span class="chapter-badge" id="diary-chapter-badge">অধ্যায় ১</span>
+            <h4 class="chapter-headline" id="diary-chapter-title">প্রথম বার্তা ও অপ্রত্যাশিত ভালো লাগা</h4>
+            <span class="chapter-date" id="diary-chapter-date">9 August 2026</span>
+          </div>
+
+          <div class="diary-action-controls">
+            <button id="diary-play-toggle" class="pill-btn diary-play-btn" aria-label="Pause or play auto page-turn" title="অটো-টার্ন চালু/বন্ধ">
+              <span class="play-icon" id="play-pause-icon">⏸</span>
+              <span class="play-text" id="play-pause-text">অটো-টার্ন</span>
+            </button>
+            <div class="diary-dots-indicator" id="diary-dots-indicator">
+              <!-- Dynamically populated page dots -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 3. "MEMORABLE MOMENTS" SECTION ==================== -->
+    <section id="moments" class="section moments-section">
+      <div class="container">
+        
+        <div class="section-header reveal-fade">
+          <span class="section-pill-tag">💬 চ্যাটের সোনালী স্মৃতি</span>
+          <h2 class="section-title">
+            অবিস্মরণীয় <span class="gradient-text">মুহূর্তগুলো</span>
+            <span class="title-icon">💖</span>
+          </h2>
+          <p class="section-intro">
+            ছোট ছোট মেসেজের ভাঁজে লুকিয়ে থাকা নির্মল হাসি, মিষ্টি খুনসুটি আর রাতজাগা হৃদয়ের গভীর কথামালা।
+          </p>
+        </div>
+
+        <!-- Carousel Wrapper with Glassmorphism Controls -->
+        <div class="carousel-outer-wrapper reveal-fade">
+          <button id="carousel-prev" class="carousel-btn prev-btn glass-card" aria-label="Previous chat memory">
+            <span>❮</span>
+          </button>
+
+          <div class="carousel-track-container" id="carousel-track-container">
+            <div class="carousel-track" id="carousel-track">
+              <!-- Dynamically rendered messenger memory cards -->
+            </div>
+          </div>
+
+          <button id="carousel-next" class="carousel-btn next-btn glass-card" aria-label="Next chat memory">
+            <span>❯</span>
+          </button>
+        </div>
+
+        <!-- Carousel Pagination Dots -->
+        <div class="carousel-indicators" id="carousel-indicators"></div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 4. VIRTUAL DATES SECTION ==================== -->
+    <section id="dates" class="section dates-section">
+      <div class="container">
+        
+        <div class="section-header reveal-fade">
+          <span class="section-pill-tag">💌 দূরত্বের মাঝেও পরম নৈকট্য • অনলাইন ডেটের স্মৃতি</span>
+          <h2 class="section-title">
+            আমাদের <span class="gradient-text">ভার্চুয়াল ডেটসমূহ</span>
+            <span class="title-icon">💫</span>
+          </h2>
+          <p class="section-intro">
+            দূরত্ব হয়তো শত কিলোমিটারের, কিন্তু অনুভূতির টানে আমরা এক হয়েছি অজস্র মুহূর্তে। অনলাইনে স্ক্রিন আর ফোনের ওপারে কাটানো আমাদের বিশেষ ডেটগুলোর মিষ্টি খতিয়ান।
+          </p>
+        </div>
+
+        <!-- TOTAL DATES SUMMARY BAR -->
+        <div class="dates-summary-bar glass-card reveal-fade">
+          <div class="dates-summary-header">
+            <span class="summary-sparkle">✨</span>
+            <span class="summary-title">মোট সম্পন্ন হওয়া ভার্চুয়াল ডেট</span>
+            <span class="summary-sparkle">✨</span>
+          </div>
+          <div class="dates-summary-stats">
+            <div class="summary-stat-pill total-pill">
+              <span class="stat-emoji">💖</span>
+              <div class="stat-info">
+                <span class="stat-number" id="total-dates-count">১২টি</span>
+                <span class="stat-text">অনলাইন ডেট</span>
+              </div>
+            </div>
+            <div class="summary-divider" aria-hidden="true"></div>
+            <div class="summary-stat-pill">
+              <span class="stat-emoji">🎬</span>
+              <div class="stat-info">
+                <span class="stat-number">৫ বার</span>
+                <span class="stat-text">মুভি ডেট</span>
+              </div>
+            </div>
+            <div class="summary-stat-pill">
+              <span class="stat-emoji">🌙</span>
+              <div class="stat-info">
+                <span class="stat-number">৬ বার</span>
+                <span class="stat-text">স্লিপিং ডেট</span>
+              </div>
+            </div>
+            <div class="summary-stat-pill">
+              <span class="stat-emoji">🛺</span>
+              <div class="stat-info">
+                <span class="stat-number">১ বার</span>
+                <span class="stat-text">রিকশা ডেট</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 DATES CARDS GRID -->
+        <div class="dates-grid">
+
+          <!-- CARD 1: MOVIE DATE (5 TIMES) -->
+          <div class="date-card glass-card reveal-fade date-card-movie">
+            <div class="date-card-accent-blob"></div>
+            <div class="date-card-top">
+              <div class="date-icon-circle movie-icon-bg">
+                <span>🎬</span>
+              </div>
+              <div class="date-count-badge badge-movie">
+                <span class="badge-dot"></span>
+                <span>৫ বার সম্পন্ন</span>
+              </div>
+            </div>
+
+            <div class="date-card-content">
+              <h3 class="date-title">মুভি ডেট <span class="en-sub">(Movie Date)</span></h3>
+              <p class="date-description">
+                স্ক্রিন শেয়ার করে একই সাথে সিনেমা দেখার রাত। ভৌতিক বা থ্রিলারের সাসপেন্স আর দুজন মিলে একসাথে শিহরিত হওয়ার চমৎকার সব অনুভূতি।
+              </p>
+
+              <!-- Movies List Showcase -->
+              <div class="movies-showcase">
+                <div class="movies-showcase-title">
+                  <span>🍿 একসাথে দেখা ৫টি মুভি:</span>
+                </div>
+                <div class="movies-list">
+                  <div class="movie-item">
+                    <span class="movie-order">১ম</span>
+                    <span class="movie-pill-name">💥 Blast</span>
+                  </div>
+                  <div class="movie-item">
+                    <span class="movie-order">২য়</span>
+                    <span class="movie-pill-name">🎭 Ratsasan</span>
+                  </div>
+                  <div class="movie-item">
+                    <span class="movie-order">৩য়</span>
+                    <span class="movie-pill-name">👑 Maharaja</span>
+                  </div>
+                  <div class="movie-item">
+                    <span class="movie-order">৪র্থ</span>
+                    <span class="movie-pill-name">🔍 Forensic</span>
+                  </div>
+                  <div class="movie-item highlight-movie">
+                    <div class="movie-info-group">
+                      <span class="movie-order">৫ম</span>
+                      <span class="movie-pill-name">🎬 Makkhi</span>
+                    </div>
+                    <span class="movie-date-tag">১৬ সেপ্টেম্বর ২০২৬</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="date-card-footer">
+              <div class="date-card-quote">
+                <span class="quote-icon">“</span>
+                <span class="quote-text">মুভির ক্লাইম্যাক্সের চেয়েও বেশি আকর্ষণ ছিল অপর প্রান্তে আপনার প্রতিক্রিয়া শোনার মাঝে!</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 2: SLEEPING DATE (6 TIMES) -->
+          <div class="date-card glass-card reveal-fade date-card-sleep">
+            <div class="date-card-accent-blob"></div>
+            <div class="date-card-top">
+              <div class="date-icon-circle sleep-icon-bg">
+                <span>🌙</span>
+              </div>
+              <div class="date-count-badge badge-sleep">
+                <span class="badge-dot"></span>
+                <span>৬ বার সম্পন্ন</span>
+              </div>
+            </div>
+
+            <div class="date-card-content">
+              <h3 class="date-title">স্লিপিং ডেট <span class="en-sub">(Sleeping Date)</span></h3>
+              <p class="date-description">
+                ফোনের লাইনে একে অপরকে রেখে নিশ্চিন্ত ঘুম। ওপাশে শান্ত নিঃশ্বাসের শব্দ আর নীরব উপস্থিতি জেনে রাত কাটানো এক অদ্ভুত ভালোবাসার প্রশান্তি।
+              </p>
+
+              <!-- Sleeping Dates List Showcase -->
+              <div class="sleep-showcase">
+                <div class="sleep-showcase-title">
+                  <span>🌙 সম্পন্ন হওয়া ৬টি স্লিপিং ডেট:</span>
+                </div>
+                <div class="sleep-dates-list">
+                  <div class="sleep-item">
+                    <span class="sleep-order">১ম</span>
+                    <div class="sleep-item-info">
+                      <span class="sleep-item-title">প্রথম স্লিপিং ডেট</span>
+                      <span class="sleep-item-sub">পূর্বের স্মৃতি</span>
+                    </div>
+                  </div>
+                  <div class="sleep-item">
+                    <span class="sleep-order">২য়</span>
+                    <div class="sleep-item-info">
+                      <span class="sleep-item-title">দ্বিতীয় স্লিপিং ডেট</span>
+                      <span class="sleep-item-sub">পূর্বের স্মৃতি</span>
+                    </div>
+                  </div>
+                  <div class="sleep-item highlight-date">
+                    <span class="sleep-order">৩য়</span>
+                    <div class="sleep-item-info">
+                      <span class="sleep-item-title">১৪ সেপ্টেম্বর ২০২৬</span>
+                      <span class="sleep-item-sub">অন-কল ঘুম 💤</span>
+                    </div>
+                  </div>
+                  <div class="sleep-item highlight-date">
+                    <span class="sleep-order">৪র্থ</span>
+                    <div class="sleep-item-info">
+                      <span class="sleep-item-title">১৫ সেপ্টেম্বর ২০২৬</span>
+                      <span class="sleep-item-sub">অন-কল ঘুম 💤</span>
+                    </div>
+                  </div>
+                  <div class="sleep-item highlight-date">
+                    <span class="sleep-order">৫ম</span>
+                    <div class="sleep-item-info">
+                      <span class="sleep-item-title">১৬ সেপ্টেম্বর ২০২৬</span>
+                      <span class="sleep-item-sub">অন-কল ঘুম 💤</span>
+                    </div>
+                  </div>
+                  <div class="sleep-item highlight-date today-highlight">
+                    <span class="sleep-order">৬ষ্ঠ</span>
+                    <div class="sleep-item-info">
+                      <span class="sleep-item-title">১৭ সেপ্টেম্বর ২০২৬</span>
+                      <span class="sleep-item-sub">(আজ) অন-কল ঘুম 💖💤</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="date-highlight-box sleep-highlight">
+                <div class="highlight-icon">💤</div>
+                <div class="highlight-text">
+                  <strong>লাইভ অন-কল স্লিপ:</strong> গভীর রাতে কথা বলতে বলতে ঘুমিয়ে পড়া এবং ভোর পর্যন্ত কল সচল রেখে একে অপরের সাথে জেগে ওঠা।
+                </div>
+              </div>
+            </div>
+
+            <div class="date-card-footer">
+              <div class="date-card-quote">
+                <span class="quote-icon">“</span>
+                <span class="quote-text">কলের ওপাশে আপনার শান্ত উপস্থিতি পুরো রাতের নিরাপত্তাটুকু উপহার দিত...</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 3: RICKSHAW DATE (1 TIME) -->
+          <div class="date-card glass-card reveal-fade date-card-rickshaw">
+            <div class="date-card-accent-blob"></div>
+            <div class="date-card-top">
+              <div class="date-icon-circle rickshaw-icon-bg">
+                <span>🛺</span>
+              </div>
+              <div class="date-count-badge badge-rickshaw">
+                <span class="badge-dot"></span>
+                <span>১ বার সম্পন্ন</span>
+              </div>
+            </div>
+
+            <div class="date-card-content">
+              <h3 class="date-title">রিকশা ডেট <span class="en-sub">(Rickshaw Date)</span></h3>
+              <p class="date-description">
+                দুজনে দুটি ভিন্ন শহরের রিকশায় চড়ে ব্যাক ক্যামেরা অন করে একে অপরকে নিজেদের আশপাশের রাস্তাঘাট, স্নিগ্ধ বাতাস আর শহরটা ঘুরে দেখানো।
+              </p>
+
+              <div class="date-highlight-box rickshaw-highlight">
+                <div class="highlight-icon">🌆</div>
+                <div class="highlight-text">
+                  <strong>ভার্চুয়াল সিটি রাইড:</strong> শহর আলাদা ছিল ঠিকই, কিন্তু ফোনের স্ক্রিনের আলোয় রাস্তাগুলো যেন এক সুতোয় বাঁধা পড়েছিল।
+                </div>
+              </div>
+            </div>
+
+            <div class="date-card-footer">
+              <div class="date-card-quote">
+                <span class="quote-icon">“</span>
+                <span class="quote-text">শহর আলাদা হলেও মন তো একই রিকশার হুডের নিচে পাশাপাশি বসে স্নিগ্ধ বাতাস উপভোগ করছিল!</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 5. "DREAM PAGE" SECTION ==================== -->
+    <section id="dreams" class="section dreams-section">
+      <div class="container">
+        
+        <div class="section-header reveal-fade">
+          <span class="section-pill-tag">☁️ স্বপ্নের মায়াবী জগৎ</span>
+          <h2 class="section-title">
+            আমাদের <span class="gradient-text">স্বপ্নের ডায়েরি</span>
+            <span class="title-icon">💭</span>
+          </h2>
+          <p class="section-intro">
+            ঘুমের রাজ্যে আমি বা পিচ্চি যে মিষ্টি স্বপ্নগুলো দেখেছি, সেগুলোর সযত্নে রাখা কিছু ডায়েরি নোট। স্বপ্নের শিরোনামে ক্লিক করে পুরো বিবরণ পড়া যাবে।
+          </p>
+        </div>
+
+        <!-- MAIN TWO-CARD LANDING VIEW -->
+        <div class="dreams-landing-view reveal-fade" id="dreams-landing-view">
+          
+          <!-- CARD 1: PARTNER'S DREAMS -->
+          <div class="dream-landing-card dream-card-partner glass-card" id="card-partner-dreams" role="button" tabindex="0" aria-label="Open Partner's Dreams">
+            <div class="dream-card-glow-bg"></div>
+            
+            <!-- Animated Dream Bubble Trail & Cloud -->
+            <div class="dream-bubble-complex">
+              <div class="dream-cloud-speech-bubble">
+                <span class="bubble-sparkle">✨</span>
+                <p class="bubble-quote-text">"ঘুমের রাজ্যে Partner-এর দেখা মিষ্টি স্বপ্নগুলো"</p>
+                <span class="bubble-tap-hint">স্বপ্নের তালিকা দেখতে ক্লিক করুন →</span>
+              </div>
+              <div class="bubble-trail-dots" aria-hidden="true">
+                <span class="trail-circle circle-lg"></span>
+                <span class="trail-circle circle-md"></span>
+                <span class="trail-circle circle-sm"></span>
+              </div>
+            </div>
+
+            <!-- Sleeping Character Illustration: Boy with round glasses -->
+            <div class="sleeping-scene-wrapper">
+              <div class="sleeping-illustration-box" id="boy-sleeping-art">
+                <!-- Soft 3D SVG Render of Boy in Glasses Asleep in Bed -->
+              </div>
+            </div>
+
+            <div class="dream-card-footer">
+              <div class="dreamer-badge partner-badge">
+                <span class="badge-icon">🌙</span>
+                <span class="badge-name">Partner-এর স্বপ্নের ডায়েরি</span>
+              </div>
+              <span class="dream-count-tag" id="partner-dream-count">০ টি স্বপ্ন</span>
+            </div>
+          </div>
+
+          <!-- CARD 2: PICCHI'S DREAMS -->
+          <div class="dream-landing-card dream-card-picchi glass-card" id="card-picchi-dreams" role="button" tabindex="0" aria-label="Open Picchi's Dreams">
+            <div class="dream-card-glow-bg"></div>
+            
+            <!-- Animated Dream Bubble Trail & Cloud -->
+            <div class="dream-bubble-complex">
+              <div class="dream-cloud-speech-bubble">
+                <span class="bubble-sparkle">🌸</span>
+                <p class="bubble-quote-text">"ঘুমের মাঝে Picchi-র দেখা রূপকথার মতো স্বপ্ন"</p>
+                <span class="bubble-tap-hint">স্বপ্নের তালিকা দেখতে ক্লিক করুন →</span>
+              </div>
+              <div class="bubble-trail-dots" aria-hidden="true">
+                <span class="trail-circle circle-lg"></span>
+                <span class="trail-circle circle-md"></span>
+                <span class="trail-circle circle-sm"></span>
+              </div>
+            </div>
+
+            <!-- Sleeping Character Illustration: Girl with round glasses -->
+            <div class="sleeping-scene-wrapper">
+              <div class="sleeping-illustration-box" id="girl-sleeping-art">
+                <!-- Soft 3D SVG Render of Girl in Glasses Asleep in Bed -->
+              </div>
+            </div>
+
+            <div class="dream-card-footer">
+              <div class="dreamer-badge picchi-badge">
+                <span class="badge-icon">⭐</span>
+                <span class="badge-name">Picchi-র স্বপ্নের ডায়েরি</span>
+              </div>
+              <span class="dream-count-tag" id="picchi-dream-count">০ টি স্বপ্ন</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- DEDICATED DRILL-DOWN ACCORDION VIEW (Initially Hidden) -->
+        <div class="dreams-detail-view glass-card" id="dreams-detail-view" style="display: none;">
+          <div class="detail-view-header">
+            <button class="pill-btn back-btn" id="dreams-back-btn" aria-label="Go back to dreams landing view">
+              <span class="btn-arrow">←</span>
+              <span>ফিরে যান</span>
+            </button>
+            <div class="detail-person-header">
+              <div class="detail-avatar-icon" id="detail-avatar-icon">🌙</div>
+              <div class="detail-header-texts">
+                <h3 class="detail-title" id="detail-person-title">Partner's Dreams</h3>
+                <p class="detail-subtitle" id="detail-person-subtitle">ঘুমের রাজ্যে দেখা কিছু মিষ্টি স্বপ্ন</p>
+              </div>
+            </div>
+            <span class="detail-count-pill" id="detail-count-pill">0 টি স্বপ্ন</span>
+          </div>
+
+          <!-- Date-Sorted Accordion Container -->
+          <div class="dreams-accordion-list" id="dreams-accordion-list">
+            <!-- Dynamically populated from script.js -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 5. "VIBE MATCH %" SECTION ==================== -->
+    <section id="vibe" class="section vibe-section">
+      <div class="container">
+        
+        <div class="section-header reveal-fade">
+          <span class="section-pill-tag">🔥 হৃদয়ের রসায়ন</span>
+          <h2 class="section-title">
+            আমাদের <span class="gradient-text">ভাইব ম্যাচ</span>
+            <span class="title-icon">⚡</span>
+          </h2>
+          <p class="section-intro">
+            বর্তমান এই মেকি ও নষ্ট জেনারেশনের ভিড়ে আমাদের দুজনের চিন্তা-ভাবনা আর মন-মানসিকতার এক অদ্ভুত স্বর্গীয় মিল।
+          </p>
+        </div>
+
+        <div class="vibe-card glass-card reveal-fade">
+          
+          <!-- Central Circular Progress Ring -->
+          <div class="vibe-circle-wrapper">
+            <div class="circular-progress-box">
+              <svg class="progress-ring-svg" viewBox="0 0 200 200" width="220" height="220">
+                <defs>
+                  <linearGradient id="vibeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ff2d78" />
+                    <stop offset="50%" stop-color="#ff4d4d" />
+                    <stop offset="100%" stop-color="#ff7a45" />
+                  </linearGradient>
+                  <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="6" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                </defs>
+                <circle class="ring-bg" cx="100" cy="100" r="82" />
+                <circle class="ring-progress" id="ring-progress" cx="100" cy="100" r="82" />
+              </svg>
+              <div class="ring-center-content">
+                <span class="ring-icon">❤️‍🔥</span>
+                <span class="ring-number" id="vibe-percentage-text">98%</span>
+                <span class="ring-label">মনের সুর</span>
+              </div>
+            </div>
+            <p class="ring-caption">"নষ্ট জেনারেশনের ভিড়ে আমাদের মন মানসিকতার চিরন্তন মিল"</p>
+          </div>
+
+          <!-- Category Progress Bars -->
+          <div class="vibe-breakdown">
+            <h3 class="breakdown-title">
+              <span>ক্যাটাগরি ভিত্তিক সামঞ্জস্য</span>
+              <span class="category-sparkle">✨</span>
+            </h3>
+            <div class="category-bars-grid" id="category-bars-grid">
+              <!-- Dynamically populated category bars -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 14 Detailed Traits Showcase (Matches & Contrasts) -->
+        <div class="vibe-traits-container reveal-fade">
+          <div class="vibe-traits-header">
+            <span class="section-pill-tag">✨ মনের আয়নায় আমরা দুজন</span>
+            <h3 class="vibe-traits-title">
+              আমাদের <span class="gradient-text">অদ্ভুত মিল ও মিষ্টি অমিল</span>
+              <span class="heart-sparkle">💞</span>
+            </h3>
+            <p class="vibe-traits-subtitle">
+              ১৪টি অনন্য বৈশিষ্ট্য যা প্রমাণ করে আমাদের এই বন্ধুত্ব কতটা গভীর ও আন্তরিক
+            </p>
+          </div>
+          
+          <!-- Sub-grid 1: 100% Matching Traits -->
+          <div class="traits-group-box match-group glass-card">
+            <div class="traits-group-header">
+              <div class="group-header-left">
+                <span class="group-icon">🤝</span>
+                <div>
+                  <h4 class="group-title">একই সুতোয় গাঁথা (নিখুঁত মিল)</h4>
+                  <p class="group-desc">যেখানে দুজনের চিন্তা ও অনুভূতি অবিকল এক</p>
+                </div>
+              </div>
+              <span class="group-badge match-badge">১০০% ম্যাচ</span>
+            </div>
+            <div class="traits-grid" id="vibe-matches-grid">
+              <!-- 8 match cards dynamically rendered from script.js -->
+            </div>
+          </div>
+
+          <!-- Sub-grid 2: Cute Contrasting Traits -->
+          <div class="traits-group-box contrast-group glass-card">
+            <div class="traits-group-header">
+              <div class="group-header-left">
+                <span class="group-icon">🌸</span>
+                <div>
+                  <h4 class="group-title">মিষ্টি অমিল ও মুগ্ধতা (বৈপরীত্য)</h4>
+                  <p class="group-desc">ভিন্ন রুচি যা বন্ধনকে করেছে আরও প্রাণবন্ত ও মায়াবী</p>
+                </div>
+              </div>
+              <span class="group-badge contrast-badge">পরস্পর পরিপূরক</span>
+            </div>
+            <div class="traits-grid" id="vibe-contrasts-grid">
+              <!-- 6 contrast cards dynamically rendered from script.js -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 6. "HEART & DREAM CATCHER" ARCADE GAME ==================== -->
+    <section id="game" class="section game-section">
+      <div class="container">
+        
+        <div class="section-header reveal-fade">
+          <span class="section-pill-tag">🎮 মিষ্টি আর্কেড গেইম</span>
+          <h2 class="section-title">
+            হার্ট অ্যান্ড <span class="gradient-text">ড্রিম ক্যাচার</span>
+            <span class="title-icon">🧺</span>
+          </h2>
+          <p class="section-intro">
+            আকাশ থেকে ভেসে আসা মিষ্টি উপহার, ফুল আর স্বপ্নগুলো ঝুড়িতে লুফে নিন! তবে সাবধান—জেলাস বোম্ব থেকে দূরে থাকুন!
+          </p>
+        </div>
+
+        <div class="arcade-cabinet glass-card reveal-fade">
+          
+          <!-- Top Arcade HUD Bar -->
+          <div class="arcade-hud">
+            <div class="hud-item hud-score">
+              <span class="hud-label">স্কোর</span>
+              <span class="hud-value" id="game-score">০</span>
+            </div>
+            <div class="hud-item hud-combo">
+              <span class="hud-label">কম্বো</span>
+              <span class="hud-value combo-badge" id="game-combo">x১</span>
+            </div>
+            <div class="hud-item hud-lives">
+              <span class="hud-label">জীবন</span>
+              <span class="hud-value" id="game-lives">❤️❤️❤️</span>
+            </div>
+            <div class="hud-item hud-timer">
+              <span class="hud-label">সময়</span>
+              <span class="hud-value" id="game-timer">৪৫s</span>
+            </div>
+            <div class="hud-item hud-highscore">
+              <span class="hud-label">🏆 সেরা</span>
+              <span class="hud-value" id="game-highscore">০</span>
+            </div>
+            <button id="game-sound-toggle" class="hud-sound-btn" title="সাউন্ড অন/অফ" aria-label="Toggle sound">
+              <span id="sound-icon">🔊</span>
+            </button>
+          </div>
+
+          <!-- Main Game Stage / Canvas Area -->
+          <div class="arcade-stage" id="arcade-stage">
+            <canvas id="game-canvas"></canvas>
+
+            <!-- Start Game Overlay -->
+            <div class="arcade-overlay start-overlay" id="game-start-overlay">
+              <div class="overlay-card glass-card">
+                <div class="overlay-icon-bounce">🧺✨</div>
+                <h3 class="overlay-title">হার্ট অ্যান্ড ড্রিম ক্যাচার</h3>
+                <p class="overlay-subtitle">আপনার চরিত্র বেছে নিন এবং উপহারগুলো ঝুড়িতে লুফে নিন!</p>
+                
+                <!-- Character Selection Tabs -->
+                <div class="character-select-group">
+                  <button type="button" class="char-btn active" data-char="partner" id="char-btn-partner">
+                    <span class="char-avatar">👦👓</span>
+                    <span class="char-name">Partner</span>
+                    <span class="char-tag">শান্ত ও যত্নশীল</span>
+                  </button>
+                  <button type="button" class="char-btn" data-char="picchi" id="char-btn-picchi">
+                    <span class="char-avatar">👧🌸</span>
+                    <span class="char-name">Picchi</span>
+                    <span class="char-tag">চঞ্চল ও মিষ্টি</span>
+                  </button>
+                </div>
+
+                <!-- Item Guide Legend -->
+                <div class="game-items-legend">
+                  <div class="legend-item"><span class="item-ico">💖</span> হার্ট <strong>+১০</strong></div>
+                  <div class="legend-item"><span class="item-ico">🌼</span> ভৃঙ্গরাজ <strong>+১৫</strong></div>
+                  <div class="legend-item"><span class="item-ico">🏍️</span> রয়্যাল এনফিল্ড <strong>+২৫</strong></div>
+                  <div class="legend-item"><span class="item-ico">☕</span> কফি <strong>+২০</strong></div>
+                  <div class="legend-item"><span class="item-ico">💎</span> রত্ন <strong>+৩০</strong></div>
+                  <div class="legend-item bomb-legend"><span class="item-ico">💣</span> জেলাসি <strong>-১ ❤️</strong></div>
+                </div>
+
+                <button id="game-start-btn" class="pill-btn primary-btn game-play-btn">
+                  <span>খেলা শুরু করুন 🚀</span>
+                </button>
+
+                <p class="control-hint">
+                  <span class="desktop-hint">💻 মাউস বা Arrow Key (← →) দিয়ে ঝুড়ি চালান</span>
+                  <span class="mobile-hint">📱 স্ক্রিনে আঙুল দিয়ে ড্র্যাগ করুন বা নিচের বাটন চাপুন</span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Game Over / Victory Overlay -->
+            <div class="arcade-overlay result-overlay" id="game-result-overlay" style="display: none;">
+              <div class="overlay-card glass-card">
+                <div class="result-badge-icon" id="result-icon">🏆</div>
+                <h3 class="overlay-title" id="result-title">খেলা সমাপ্ত!</h3>
+                <p class="result-rating-msg" id="result-msg">ভালোবাসার ঝুড়ি একদম টইটম্বুর!</p>
+                
+                <div class="result-stats-board">
+                  <div class="result-stat-box">
+                    <span class="stat-num" id="final-score">০</span>
+                    <span class="stat-lbl">মোট স্কোর</span>
+                  </div>
+                  <div class="result-stat-box">
+                    <span class="stat-num" id="items-caught-count">০</span>
+                    <span class="stat-lbl">উপহার সংগ্রহ</span>
+                  </div>
+                  <div class="result-stat-box">
+                    <span class="stat-num" id="max-combo-stat">x১</span>
+                    <span class="stat-lbl">ম্যাক্স কম্বো</span>
+                  </div>
+                </div>
+
+                <div class="result-actions">
+                  <button id="game-restart-btn" class="pill-btn primary-btn">
+                    <span>🔄 আবার খেলুন</span>
+                  </button>
+                  <button id="game-celebrate-btn" class="pill-btn secondary-btn">
+                    <span>✨ উৎসব পালন করুন</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating In-game Mobile Controls -->
+            <div class="mobile-touch-controls" id="mobile-touch-controls">
+              <button type="button" class="touch-btn touch-btn-left" id="touch-left-btn" aria-label="Move left">◀</button>
+              <button type="button" class="touch-btn touch-btn-right" id="touch-right-btn" aria-label="Move right">▶</button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== 6. FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      
+      <div class="footer-heart-symbol">
+        <span class="floating-heart">💖</span>
+      </div>
+
+      <p class="footer-quote" id="footer-closing-quote">
+        "কিছু সম্পর্কের কোনো ব্যাখ্যার প্রয়োজন হয় না, তারা যেন ঠিক নিজের মনের ঘরে ফিরে আসার মতো পরম প্রশান্তি।"
+      </p>
+
+      <div class="footer-badge glass-card">
+        <span class="badge-icon">📅</span>
+        <span class="badge-text" id="footer-start-date-text">অবিচ্ছেদ্য বন্ধুত্ব • ৯ আগস্ট ২০২৬ থেকে</span>
+      </div>
+
+      <p class="footer-credits">
+        স্নেহ ও ভালোবাসায় নির্মিত <span class="heart-pulse">❤️</span> <strong id="footer-names">Partner&amp;Picchi Diaries</strong> • অনন্তকাল ধরে
+      </p>
+
+      <a href="#hero" class="back-to-top" aria-label="Back to top">
+        <span>↑</span>
+      </a>
+
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal for Chat Screenshots -->
+  <div id="screenshot-lightbox" class="lightbox-modal" aria-hidden="true" role="dialog">
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox-dialog glass-card">
+      <button class="lightbox-close-btn" id="lightbox-close" aria-label="Close image preview">✕</button>
+      <div class="lightbox-header">
+        <h4 id="lightbox-title" class="lightbox-title">চ্যাট স্মৃতি</h4>
+        <span id="lightbox-date" class="lightbox-date"></span>
+      </div>
+      <div class="lightbox-body">
+        <img id="lightbox-img" src="" alt="Screenshot Preview" class="lightbox-full-img" />
+      </div>
+      <p id="lightbox-caption" class="lightbox-caption"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
