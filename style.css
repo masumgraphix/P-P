@@ -1265,6 +1265,7 @@ h1, h2, h3, h4, h5 {
   display: flex;
   align-items: center;
   gap: 0.3rem;
+  white-space: nowrap;
 }
 
 .messenger-status::before {
@@ -1609,6 +1610,7 @@ h1, h2, h3, h4, h5 {
   justify-content: center;
   gap: 0.6rem;
   margin-top: 1.2rem;
+  flex-wrap: wrap;
 }
 
 .indicator-dot {

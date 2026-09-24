@@ -206,6 +206,54 @@ const STORY_CONFIG = {
       caption: "রাত পেরিয়ে ভোর—একটানা সাড়ে ৭ ঘণ্টারও বেশি সময়ের অবিরাম ভিডিও কল! কথার মাঝে কখন যে ভোর পেরিয়ে সকাল হয়ে গেছে টেরই পাওয়া যায়নি। মিষ্টি মান-অভিমান আর আরেকটু ঘুমের আবদার।",
       reaction: "📞",
       dateTag: "বিশেষ মুহূর্ত • সাড়ে ৭ ঘণ্টার সুদীর্ঘ কল"
+    },
+    {
+      sender: "Partner & Picchi",
+      avatarLetter: "P",
+      status: "৮ দিনের খুনসুটি",
+      tag: "ধৈর্য ও এন্ট্রি",
+      title: "লাইফে এন্ট্রি মারার ধন্যবাদ ও ৮ দিনের স্মৃতি ✨",
+      image: "assets/memory-chat-5.jpg",
+      quote: "বাহ, কি ধৈর্য, আমার লাইফে এভাবে এন্ট্রি মারার জন্য ধন্যবাদ✨✨ — হইছে না ৮ দিন?",
+      caption: "পরিচয়ের মাত্র ৮ দিনের মাথায় খুনসুটি, মান্যতা আর মিষ্টি অধিকারবোধ। জীবনে এত ধৈর্য নিয়ে মায়াবী এন্ট্রি নেওয়ার জন্য ধন্যবাদ ও ভয়েস নোট বিনিময়।",
+      reaction: "✨",
+      dateTag: "স্মৃতির অ্যালবাম • ৮ দিনের মিষ্টি এন্ট্রি"
+    },
+    {
+      sender: "Partner & Picchi",
+      avatarLetter: "P",
+      status: "পুরনো টেক্সট",
+      tag: "পুরনো কথা",
+      title: "পুরনো টেক্সট পড়ে একা একা হাসার অভ্যাস 📜",
+      image: "assets/memory-chat-6.jpg",
+      quote: "আমি প্রায়ই পুরনো টেক্সট পড়ি। আগের দিনের কথা গুলো মনে করি... গতকাল হাসালাম, আপনি কি সেই পুরনো মেসেজ পরে আবার হাসেন? হুম এরকমই!",
+      caption: "আগের দিনের কথাগুলো মনে করে পুরনো মেসেজ পড়ে আপন মনেই একা একা হেসে ওঠার এক মিষ্টি অভ্যাস। শব্দের ওপারে জমে থাকা গভীর অনুভূতি।",
+      reaction: "😊",
+      dateTag: "স্মৃতির অ্যালবাম • পুরনো কথার ভালোলাগা"
+    },
+    {
+      sender: "Partner & Picchi",
+      avatarLetter: "P",
+      status: "গভীর নির্ভরতা",
+      tag: "পাশে থাকা",
+      title: "আই উইল বি হেয়ার অলওয়েজ ফর ইউ 💛",
+      image: "assets/memory-chat-7.jpg",
+      quote: "Dear Picchi, if your heart feels heavy, I will listen... No matter what life brings, remember this, I will here always for you 💛",
+      caption: "মন খারাপ হলে কান পেতে শোনার আর জীবনের যেকোনো পরিস্থিতিতে নিঃশর্ত পাশে থাকার এক অটুট প্রতিশ্রুতি। 'You'll always have someone to count on'—এক পরম নির্ভরতার আশ্রয়।",
+      reaction: "💛",
+      dateTag: "১৬ আগস্ট ২০২৬ • গভীর নির্ভরতার অঙ্গীকার"
+    },
+    {
+      sender: "Partner & Picchi",
+      avatarLetter: "P",
+      status: "নিখাদ মায়া",
+      tag: "ফ্রেন্ডশিপ",
+      title: "কথা না বললে ভালো লাগে না • এটা মায়া ও ফ্রেন্ডশিপ 💫",
+      image: "assets/memory-chat-8.jpg",
+      quote: "আপনার সাথে কথা না বললে আমার ভালো লাগে না... এটা মায়া, এটা সবাইকে দেয়া যায়না... আর এটা হলো ফ্রেন্ডশিপ!",
+      caption: "অন্যান্য সম্পর্কের চেয়ে সম্পূর্ণ আলাদা এক টান—মাত্র ২ ঘণ্টা দূরে থাকলেই মন খারাপ আর একাকীত্ব। ভালোবাসা কিংবা সাধারণ বন্ধুত্বের চেয়েও যা এক অদ্ভুত পবিত্র 'মায়া'।",
+      reaction: "💫",
+      dateTag: "স্মৃতির অ্যালবাম • মায়া ও নিখাদ বন্ধুত্ব"
     }
   ],
 
@@ -1054,7 +1102,7 @@ function initMomentsCarousel() {
         </div>
         
         <div class="messenger-screenshot-frame" title="বড় করে দেখতে ক্লিক করুন">
-          <img src="${mem.image}" alt="${mem.title || 'Chat Memory'}" class="messenger-screenshot-img" loading="lazy" />
+          <img src="${mem.image}" alt="${mem.title || 'Chat Memory'}" class="messenger-screenshot-img" loading="eager" decoding="async" />
           <div class="screenshot-zoom-overlay">
             <span class="zoom-badge">🔍 বড় করে দেখুন</span>
           </div>
