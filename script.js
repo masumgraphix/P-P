@@ -280,7 +280,7 @@ const STORY_CONFIG = {
 
   // 5. Virtual Dates Breakdown (Our Special Online Dates)
   virtualDates: {
-    total: 17,
+    total: 22,
     movieDates: {
       count: 6,
       movies: [
@@ -293,7 +293,7 @@ const STORY_CONFIG = {
       ]
     },
     sleepingDates: {
-      count: 10,
+      count: 15,
       history: [
         { order: "১ম", title: "প্রথম স্লিপিং ডেট", date: null },
         { order: "২য়", title: "দ্বিতীয় স্লিপিং ডেট", date: null },
@@ -304,7 +304,12 @@ const STORY_CONFIG = {
         { order: "৭ম", title: "সপ্তম স্লিপিং ডেট", date: "২০ সেপ্টেম্বর ২০২৬" },
         { order: "৮ম", title: "অষ্টম স্লিপিং ডেট", date: "২১ সেপ্টেম্বর ২০২৬" },
         { order: "৯ম", title: "নবম স্লিপিং ডেট", date: "২২ সেপ্টেম্বর ২০২৬", note: "স্বপ্নে পিচ্চিকে ১ম বার ফেস সহ দেখা" },
-        { order: "১০ম", title: "দশম স্লিপিং ডেট", date: "২৩ সেপ্টেম্বর ২০২৬", note: "ঝগড়া রাগ অভিমান ও দুজনের কান্না" }
+        { order: "১০ম", title: "দশম স্লিপিং ডেট", date: "২৩ সেপ্টেম্বর ২০২৬", note: "ঝগড়া রাগ অভিমান ও দুজনের কান্না" },
+        { order: "১১তম", title: "একাদশ স্লিপিং ডেট", date: "২৪ সেপ্টেম্বর ২০২৬" },
+        { order: "১২তম", title: "দ্বাদশ স্লিপিং ডেট", date: "২৫ সেপ্টেম্বর ২০২৬", note: "বালিশ জড়িয়ে ঘুম 🧸💤" },
+        { order: "১৩তম", title: "ত্রয়োদশ স্লিপিং ডেট", date: "২৬ সেপ্টেম্বর ২০২৬" },
+        { order: "১৪তম", title: "চতুর্দশ স্লিপিং ডেট", date: "২৭ সেপ্টেম্বর ২০২৬" },
+        { order: "১৫তম", title: "পঞ্চদশ স্লিপিং ডেট", date: "২৮ সেপ্টেম্বর ২০২৬", note: "আজকের অন-কল ঘুম 💖💤" }
       ],
       description: "ফোনের লাইনে একে অপরকে রেখে নিশ্চিন্ত ঘুম"
     },
