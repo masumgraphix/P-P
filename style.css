@@ -1743,8 +1743,8 @@ h1, h2, h3, h4, h5 {
 .dates-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  max-width: 1140px;
+  gap: 1.5rem;
+  max-width: 1220px;
   margin: 0 auto;
 }
 
@@ -1752,7 +1752,7 @@ h1, h2, h3, h4, h5 {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 2.2rem 1.85rem;
+  padding: 2rem 1.35rem;
   border-radius: 24px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.85);
@@ -2010,9 +2010,12 @@ h1, h2, h3, h4, h5 {
 .sleep-showcase {
   background: rgba(255, 255, 255, 0.85);
   border-radius: 16px;
-  padding: 0.85rem 0.75rem;
+  padding: 0.85rem 0.65rem;
   border: 1px solid rgba(139, 92, 246, 0.2);
   margin-bottom: 1.2rem;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .sleep-showcase-title {
@@ -2024,20 +2027,25 @@ h1, h2, h3, h4, h5 {
 
 .sleep-dates-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.42rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.38rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .sleep-item {
   display: flex;
   align-items: center;
-  gap: 0.38rem;
-  padding: 0.38rem 0.42rem;
+  gap: 0.32rem;
+  padding: 0.35rem 0.42rem;
   background: #ffffff;
   border-radius: 10px;
   border: 1px solid rgba(139, 92, 246, 0.16);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
   transition: var(--transition-smooth);
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .sleep-item:hover {
@@ -2052,13 +2060,14 @@ h1, h2, h3, h4, h5 {
 }
 
 .sleep-order {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 800;
   color: #7c3aed;
   background: rgba(139, 92, 246, 0.1);
-  padding: 1px 5px;
+  padding: 1px 4px;
   border-radius: 6px;
   line-height: 1.2;
+  flex-shrink: 0;
 }
 
 .sleep-item-info {
@@ -2066,19 +2075,27 @@ h1, h2, h3, h4, h5 {
   flex-direction: column;
   line-height: 1.2;
   overflow: hidden;
+  min-width: 0;
+  flex: 1;
 }
 
 .sleep-item-title {
-  font-size: 0.8rem;
+  font-size: 0.69rem;
+  letter-spacing: -0.01em;
   font-weight: 700;
   color: var(--text-dark);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sleep-item-sub {
-  font-size: 0.67rem;
+  font-size: 0.60rem;
+  letter-spacing: -0.01em;
   color: var(--text-light);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sleep-item.highlight-date .sleep-item-title {
@@ -2094,6 +2111,9 @@ h1, h2, h3, h4, h5 {
 .sleep-item.today-highlight {
   grid-column: 1 / -1;
   justify-content: center;
+  width: 100%;
+  padding: 0.45rem 0.6rem;
+  box-sizing: border-box;
   background: linear-gradient(135deg, rgba(245, 243, 255, 0.98), rgba(237, 233, 254, 0.98));
   border-color: rgba(139, 92, 246, 0.45);
   box-shadow: 0 4px 14px rgba(139, 92, 246, 0.16);
@@ -3181,6 +3201,15 @@ h1, h2, h3, h4, h5 {
    Breakpoints: 992px, 768px, 520px, 480px, 420px, 365px
    ========================================================================== */
 
+/* --- Mid-range Screens Breakpoint for Dates Grid (<= 1050px) --- */
+@media (max-width: 1050px) {
+  .dates-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 580px;
+  }
+}
+
 /* --- Tablet / Medium Screen Breakpoint (<= 992px) --- */
 @media (max-width: 992px) {
   .section {
@@ -3196,7 +3225,7 @@ h1, h2, h3, h4, h5 {
   .dates-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
-    max-width: 560px;
+    max-width: 580px;
   }
 
   .dates-summary-bar {
@@ -4065,6 +4094,18 @@ h1, h2, h3, h4, h5 {
   .movies-list,
   .sleep-dates-list {
     grid-template-columns: 1fr;
+  }
+
+  .sleep-item {
+    padding: 0.45rem 0.65rem;
+  }
+
+  .sleep-item-title {
+    font-size: 0.8rem;
+  }
+
+  .sleep-item-sub {
+    font-size: 0.68rem;
   }
 }
 
