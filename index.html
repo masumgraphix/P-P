@@ -957,6 +957,77 @@
     </div>
   </div>
 
+  <!-- ==================== 7. VINTAGE VINYL RECORD MUSIC PLAYER ==================== -->
+  <aside id="vinyl-music-player" class="vinyl-player-widget" aria-label="Music Player">
+    <audio id="bg-music" src="assets/audio/bg-song.mp3" loop preload="auto"></audio>
+    <div class="vinyl-tooltip" id="vinyl-tooltip-text" aria-hidden="true">গান শুনুন</div>
+    <button class="vinyl-player-btn is-paused" id="vinyl-player-btn" type="button" aria-label="গান শুনুন (Play Music)" title="গান চালু/বন্ধ করুন">
+      <div class="vinyl-floating-notes" aria-hidden="true">
+        <span class="music-note-float">🎵</span>
+        <span class="music-note-float">🎶</span>
+      </div>
+
+      <div class="vinyl-record-wrap">
+        <div class="vinyl-record-disc">
+          <div class="vinyl-vintage-label">
+            <span class="label-badge-star">✦</span>
+            <span class="label-text-title">P &amp; P</span>
+            <span class="label-text-sub">33⅓ RPM</span>
+          </div>
+          <div class="vinyl-center-spindle"></div>
+        </div>
+      </div>
+
+      <div class="tonearm-assembly" aria-hidden="true">
+        <svg class="tonearm-svg" viewBox="0 0 44 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="pivot-chrome-grad" x1="24" y1="2" x2="40" y2="18" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#ffffff"/>
+              <stop offset="0.45" stop-color="#cbd5e1"/>
+              <stop offset="0.8" stop-color="#64748b"/>
+              <stop offset="1" stop-color="#334155"/>
+            </linearGradient>
+            <linearGradient id="arm-chrome-grad" x1="32" y1="10" x2="16" y2="52" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#f8fafc"/>
+              <stop offset="0.5" stop-color="#cbd5e1"/>
+              <stop offset="0.85" stop-color="#94a3b8"/>
+              <stop offset="1" stop-color="#475569"/>
+            </linearGradient>
+            <linearGradient id="headshell-chrome-grad" x1="0" y1="0" x2="1" y2="1">
+              <stop stop-color="#f1f5f9"/>
+              <stop offset="0.6" stop-color="#64748b"/>
+              <stop offset="1" stop-color="#1e293b"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Counterweight Top Cylinder -->
+          <rect x="28" y="0" width="8" height="6" rx="2" fill="url(#pivot-chrome-grad)" stroke="#334155" stroke-width="0.8"/>
+          <!-- Base Pivot Circle -->
+          <circle cx="32" cy="10" r="7.5" fill="url(#pivot-chrome-grad)" stroke="#475569" stroke-width="1"/>
+          <circle cx="32" cy="10" r="3.8" fill="#1e293b"/>
+          <circle cx="32" cy="10" r="1.5" fill="#f8fafc"/>
+
+          <!-- Curved Metallic Tonearm -->
+          <path d="M32 14 C32 26, 28 36, 18 52" stroke="url(#arm-chrome-grad)" stroke-width="2.8" stroke-linecap="round"/>
+          <path d="M32 14 C32 26, 28 36, 18 52" stroke="#ffffff" stroke-width="0.9" stroke-linecap="round" opacity="0.85"/>
+
+          <!-- Headshell / Cartridge & Stylus Resting on Groove -->
+          <g transform="translate(18, 52) rotate(32)">
+            <rect x="-4.5" y="-3" width="9" height="13" rx="1.5" fill="#1e293b" stroke="#09090b" stroke-width="0.8"/>
+            <rect x="-3" y="-2" width="6" height="5" rx="0.5" fill="url(#headshell-chrome-grad)"/>
+            <line x1="0" y1="10" x2="0" y2="13.5" stroke="#f8fafc" stroke-width="1.2" stroke-linecap="round"/>
+            <circle cx="0" cy="13.5" r="0.9" fill="#ef4444"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="vinyl-status-badge" aria-hidden="true">
+        <span class="badge-icon-playing">🔊</span>
+        <span class="badge-icon-muted">🔇</span>
+      </div>
+    </button>
+  </aside>
+
   <script src="script.js"></script>
 </body>
 </html>

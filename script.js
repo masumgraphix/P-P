@@ -2539,3 +2539,112 @@ if (window.location.search.includes("test=story")) {
   if (vibe) vibe.style.display = "none";
 }
 
+// ==================== VINTAGE VINYL RECORD MUSIC PLAYER CONTROLLER ====================
+function initVintageVinylPlayer() {
+  const audio = document.getElementById("bg-music");
+  const vinylBtn = document.getElementById("vinyl-player-btn");
+  const tooltip = document.getElementById("vinyl-tooltip-text");
+
+  if (!audio || !vinylBtn) return;
+
+  let userManuallyPaused = false;
+  let interactionListenersArmed = false;
+
+  // Set initial volume for pleasant background ambiance
+  audio.volume = 0.65;
+
+  function updateUIState(isPlaying) {
+    if (isPlaying) {
+      vinylBtn.classList.remove("is-paused");
+      vinylBtn.setAttribute("aria-label", "গান বন্ধ করুন (Pause Music)");
+      if (tooltip) tooltip.textContent = "গান বন্ধ করুন";
+    } else {
+      vinylBtn.classList.add("is-paused");
+      vinylBtn.setAttribute("aria-label", "গান শুনুন (Play Music)");
+      if (tooltip) tooltip.textContent = "গান শুনুন";
+    }
+  }
+
+  function playAudio() {
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          updateUIState(true);
+        })
+        .catch(() => {
+          // Autoplay blocked by browser policy without user gesture:
+          updateUIState(false);
+          armFirstInteractionPlayback();
+        });
+    }
+  }
+
+  function pauseAudio() {
+    audio.pause();
+    updateUIState(false);
+  }
+
+  function toggleAudio() {
+    if (audio.paused) {
+      userManuallyPaused = false;
+      playAudio();
+    } else {
+      userManuallyPaused = true;
+      pauseAudio();
+    }
+  }
+
+  function armFirstInteractionPlayback() {
+    if (interactionListenersArmed || userManuallyPaused) return;
+    interactionListenersArmed = true;
+
+    const onFirstUserAction = () => {
+      if (!userManuallyPaused && audio.paused) {
+        audio
+          .play()
+          .then(() => {
+            updateUIState(true);
+          })
+          .catch(() => {});
+      }
+      cleanupListeners();
+    };
+
+    const cleanupListeners = () => {
+      ["click", "touchstart", "scroll", "keydown"].forEach((event) => {
+        window.removeEventListener(event, onFirstUserAction, { capture: true });
+      });
+      interactionListenersArmed = false;
+    };
+
+    ["click", "touchstart", "scroll", "keydown"].forEach((event) => {
+      window.addEventListener(event, onFirstUserAction, {
+        capture: true,
+        once: true,
+        passive: true
+      });
+    });
+  }
+
+  // Audio element event listeners to guarantee UI always matches playback state
+  audio.addEventListener("play", () => updateUIState(true));
+  audio.addEventListener("pause", () => updateUIState(false));
+
+  // Widget click/tap handler
+  vinylBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    toggleAudio();
+  });
+
+  // Attempt autoplay on page load
+  playAudio();
+}
+
+// Initialize when DOM is ready
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initVintageVinylPlayer);
+} else {
+  initVintageVinylPlayer();
+}
+

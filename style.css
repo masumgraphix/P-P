@@ -4804,3 +4804,379 @@ h1, h2, h3, h4, h5 {
   }
 }
 
+/* ==========================================================================
+   7. VINTAGE VINYL RECORD MUSIC PLAYER WIDGET
+   ========================================================================== */
+.vinyl-player-widget {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9990;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+.vinyl-player-btn {
+  position: relative;
+  width: 86px;
+  height: 86px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.32)) drop-shadow(0 3px 8px rgba(0, 0, 0, 0.2));
+}
+
+.vinyl-player-btn:hover {
+  transform: scale(1.08) translateY(-2px);
+  filter: drop-shadow(0 14px 30px rgba(255, 45, 120, 0.35)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.25));
+}
+
+.vinyl-player-btn:active {
+  transform: scale(0.95);
+}
+
+.vinyl-player-btn:focus-visible {
+  outline: 2px solid #ff2d78;
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+/* Vinyl Disc Outer Shell */
+.vinyl-record-wrap {
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: #09090b;
+  box-shadow: 
+    inset 0 0 0 1px rgba(255, 255, 255, 0.15),
+    inset 0 0 8px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Vinyl Grooves & Specular Sheen */
+.vinyl-record-disc {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: 
+    /* Specular Light Reflection */
+    conic-gradient(
+      from 35deg,
+      rgba(255, 255, 255, 0.16) 0deg,
+      transparent 35deg,
+      rgba(255, 255, 255, 0.05) 90deg,
+      transparent 135deg,
+      rgba(255, 255, 255, 0.16) 180deg,
+      transparent 220deg,
+      rgba(255, 255, 255, 0.05) 270deg,
+      transparent 315deg,
+      rgba(255, 255, 255, 0.16) 360deg
+    ),
+    /* Deep Grooves */
+    radial-gradient(circle at center, transparent 38%, rgba(255, 255, 255, 0.06) 40%, transparent 42%),
+    radial-gradient(circle at center, transparent 48%, rgba(255, 255, 255, 0.07) 50%, transparent 52%),
+    radial-gradient(circle at center, transparent 58%, rgba(255, 255, 255, 0.06) 60%, transparent 62%),
+    radial-gradient(circle at center, transparent 68%, rgba(255, 255, 255, 0.07) 70%, transparent 72%),
+    radial-gradient(circle at center, transparent 78%, rgba(255, 255, 255, 0.06) 80%, transparent 82%),
+    radial-gradient(circle at center, transparent 88%, rgba(255, 255, 255, 0.07) 90%, transparent 92%),
+    /* Micro Fine Grooves */
+    repeating-radial-gradient(
+      circle at center,
+      #111114 0px,
+      #111114 1.5px,
+      #1a1a20 2px,
+      #0b0b0e 2.5px,
+      #16161b 3.5px
+    );
+  animation: vinylRotate 3.5s linear infinite;
+  animation-play-state: running;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Pause: Freeze disc rotation */
+.vinyl-player-btn.is-paused .vinyl-record-disc {
+  animation-play-state: paused;
+}
+
+@keyframes vinylRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Vintage Center Label */
+.vinyl-vintage-label {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 45% 40%, #ffffff 0%, #faf6ee 50%, #eae0d0 100%);
+  box-shadow: 
+    0 0 0 1px #18181c,
+    0 0 0 2px rgba(255, 255, 255, 0.25),
+    inset 0 0 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  border: 1px dashed rgba(180, 83, 9, 0.35);
+}
+
+.label-badge-star {
+  font-size: 5px;
+  color: #b45309;
+  line-height: 1;
+  margin-bottom: 1px;
+}
+
+.label-text-title {
+  font-size: 5.5px;
+  font-weight: 900;
+  color: #991b1b;
+  letter-spacing: 0.6px;
+  line-height: 1;
+  font-family: Georgia, serif;
+}
+
+.label-text-sub {
+  font-size: 3.6px;
+  font-weight: 700;
+  color: #555555;
+  letter-spacing: 0.2px;
+  margin-top: 1px;
+  font-family: sans-serif;
+}
+
+/* Center Metallic Spindle */
+.vinyl-center-spindle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #cbd5e1 45%, #334155 100%);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
+  border: 0.8px solid #1e293b;
+}
+
+/* Turntable Tonearm */
+.tonearm-assembly {
+  position: absolute;
+  top: -2px;
+  right: 0px;
+  width: 42px;
+  height: 64px;
+  pointer-events: none;
+  transform-origin: 32px 10px; /* Center of the metallic pivot circle */
+  transition: transform 0.6s cubic-bezier(0.34, 1.45, 0.64, 1);
+  z-index: 5;
+}
+
+/* Playing: Resting on the record */
+.vinyl-player-btn .tonearm-assembly {
+  transform: rotate(0deg);
+}
+
+/* Paused: Swung outwards and lifted off */
+.vinyl-player-btn.is-paused .tonearm-assembly {
+  transform: rotate(-32deg);
+}
+
+.tonearm-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(2px 4px 5px rgba(0, 0, 0, 0.4));
+}
+
+/* Status Badge (Speaker / Mute) */
+.vinyl-status-badge {
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255, 45, 120, 0.35);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #ff2d78;
+  z-index: 6;
+  transition: all 0.3s ease;
+}
+
+.badge-icon-playing {
+  display: inline;
+}
+
+.badge-icon-muted {
+  display: none;
+}
+
+.vinyl-player-btn.is-paused .vinyl-status-badge {
+  background: rgba(243, 244, 246, 0.95);
+  border-color: rgba(156, 163, 175, 0.4);
+  color: #6b7280;
+}
+
+.vinyl-player-btn.is-paused .badge-icon-playing {
+  display: none;
+}
+
+.vinyl-player-btn.is-paused .badge-icon-muted {
+  display: inline;
+}
+
+/* Cute Floating Music Notes */
+.vinyl-floating-notes {
+  position: absolute;
+  top: -12px;
+  left: 6px;
+  width: 36px;
+  height: 30px;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  z-index: 7;
+}
+
+.vinyl-player-btn.is-paused .vinyl-floating-notes {
+  opacity: 0;
+}
+
+.music-note-float {
+  position: absolute;
+  font-size: 13px;
+  color: #ff2d78;
+  opacity: 0;
+  animation: noteDrift 2.2s infinite ease-out;
+}
+
+.music-note-float:nth-child(1) {
+  left: 2px;
+  animation-delay: 0s;
+}
+
+.music-note-float:nth-child(2) {
+  left: 18px;
+  font-size: 11px;
+  animation-delay: 1.1s;
+}
+
+@keyframes noteDrift {
+  0% {
+    transform: translate(0, 8px) scale(0.6) rotate(0deg);
+    opacity: 0;
+  }
+  35% {
+    opacity: 0.95;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-6px, -24px) scale(1.15) rotate(-18deg);
+    opacity: 0;
+  }
+}
+
+/* Tooltip on Hover */
+.vinyl-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  right: 0;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.vinyl-player-widget:hover .vinyl-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile Responsiveness (<= 768px) */
+@media (max-width: 768px) {
+  .vinyl-player-widget {
+    bottom: 18px;
+    right: 18px;
+  }
+
+  .vinyl-player-btn {
+    width: 72px;
+    height: 72px;
+  }
+
+  .vinyl-record-wrap {
+    width: 62px;
+    height: 62px;
+  }
+
+  .vinyl-vintage-label {
+    width: 24px;
+    height: 24px;
+  }
+
+  .label-text-title {
+    font-size: 4.5px;
+  }
+
+  .label-text-sub {
+    font-size: 3px;
+  }
+
+  .tonearm-assembly {
+    width: 36px;
+    height: 54px;
+    transform-origin: 27px 8px;
+  }
+
+  .vinyl-status-badge {
+    width: 22px;
+    height: 22px;
+    font-size: 10px;
+    bottom: 0px;
+    left: 0px;
+  }
+
+  .vinyl-tooltip {
+    display: none;
+  }
+}
+
+
