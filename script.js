@@ -280,16 +280,18 @@ const STORY_CONFIG = {
 
   // 5. Virtual Dates Breakdown (Our Special Online Dates)
   virtualDates: {
-    total: 22,
+    total: 24,
     movieDates: {
-      count: 6,
+      count: 8,
       movies: [
         { order: "১ম", name: "Blast", icon: "💥" },
         { order: "২য়", name: "Ratsasan", icon: "🎭" },
         { order: "৩য়", name: "Maharaja", icon: "👑" },
         { order: "৪র্থ", name: "Forensic", icon: "🔍" },
         { order: "৫ম", name: "Makkhi", icon: "🎬", date: "১৬ সেপ্টেম্বর ২০২৬" },
-        { order: "৬ষ্ঠ", name: "Total Dhamaal", icon: "😂", date: "২৪ সেপ্টেম্বর ২০২৬" }
+        { order: "৬ষ্ঠ", name: "Total Dhamaal", icon: "😂", date: "২৪ সেপ্টেম্বর ২০২৬" },
+        { order: "৭ম", name: "Bhool Bhulaiyaa", icon: "👻", date: "১ অক্টোবর ২০২৬" },
+        { order: "৮ম", name: "Black (South Movie)", icon: "🎬", date: "২ অক্টোবর ২০২৬" }
       ]
     },
     sleepingDates: {
