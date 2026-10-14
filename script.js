@@ -292,7 +292,7 @@ const STORY_CONFIG = {
 
   // 5. Virtual Dates Breakdown (Our Special Online Dates)
   virtualDates: {
-    total: 24,
+    total: 37,
     movieDates: {
       count: 8,
       movies: [
@@ -307,7 +307,7 @@ const STORY_CONFIG = {
       ]
     },
     sleepingDates: {
-      count: 15,
+      count: 28,
       history: [
         { order: "১ম", title: "প্রথম স্লিপিং ডেট", date: null },
         { order: "২য়", title: "দ্বিতীয় স্লিপিং ডেট", date: null },
@@ -323,7 +323,20 @@ const STORY_CONFIG = {
         { order: "১২তম", title: "দ্বাদশ স্লিপিং ডেট", date: "২৫ সেপ্টেম্বর ২০২৬", note: "বালিশ জড়িয়ে ঘুম 🧸💤" },
         { order: "১৩তম", title: "ত্রয়োদশ স্লিপিং ডেট", date: "২৬ সেপ্টেম্বর ২০২৬" },
         { order: "১৪তম", title: "চতুর্দশ স্লিপিং ডেট", date: "২৭ সেপ্টেম্বর ২০২৬" },
-        { order: "১৫তম", title: "পঞ্চদশ স্লিপিং ডেট", date: "২৮ সেপ্টেম্বর ২০২৬", note: "আজকের অন-কল ঘুম 💖💤" }
+        { order: "১৫তম", title: "পঞ্চদশ স্লিপিং ডেট", date: "২৮ সেপ্টেম্বর ২০২৬" },
+        { order: "১৬তম", title: "ষোড়শ স্লিপিং ডেট", date: "২৯ সেপ্টেম্বর ২০২৬" },
+        { order: "১৭তম", title: "সপ্তদশ স্লিপিং ডেট", date: "৩০ সেপ্টেম্বর ২০২৬" },
+        { order: "১৮তম", title: "অষ্টাদশ স্লিপিং ডেট", date: "১ অক্টোবর ২০২৬" },
+        { order: "১৯তম", title: "ঊনবিংশ স্লিপিং ডেট", date: "২ অক্টোবর ২০২৬" },
+        { order: "২০তম", title: "বিংশ স্লিপিং ডেট", date: "৩ অক্টোবর ২০২৬" },
+        { order: "২১তম", title: "একবিংশ স্লিপিং ডেট", date: "৪ অক্টোবর ২০২৬" },
+        { order: "২২তম", title: "দ্বাবিংশ স্লিপিং ডেট", date: "৫ অক্টোবর ২০২৬" },
+        { order: "২৩তম", title: "ত্রয়োবিংশ স্লিপিং ডেট", date: "৬ অক্টোবর ২০২৬" },
+        { order: "২৪তম", title: "চতুর্বিংশ স্লিপিং ডেট", date: "৭ অক্টোবর ২০২৬" },
+        { order: "২৫তম", title: "পঞ্চবিংশ স্লিপিং ডেট", date: "১০ অক্টোবর ২০২৬" },
+        { order: "২৬তম", title: "ষড়বিংশ স্লিপিং ডেট", date: "১১ অক্টোবর ২০২৬" },
+        { order: "২৭তম", title: "সপ্তবিংশ স্লিপিং ডেট", date: "১২ অক্টোবর ২০২৬" },
+        { order: "২৮তম", title: "অষ্টাবিংশ স্লিপিং ডেট", date: "১৩ অক্টোবর ২০২৬", note: "আজকের অন-কল ঘুম 💖💤" }
       ],
       description: "ফোনের লাইনে একে অপরকে রেখে নিশ্চিন্ত ঘুম"
     },
@@ -766,6 +779,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollAnimations();
   initFloatingHeartInteractions();
   initArcadeGame();
+  initSleepingDatesToggle();
 });
 
 /**
@@ -1305,6 +1319,33 @@ function openScreenshotLightbox(mem) {
   modal.classList.add("active");
   modal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
+}
+
+/**
+ * 4.1. Sleeping Dates "See More / Less" Toggle Controller
+ */
+function initSleepingDatesToggle() {
+  const toggleBtn = document.getElementById("sleep-toggle-btn");
+  const list = document.getElementById("sleep-dates-list");
+  if (!toggleBtn || !list) return;
+
+  const toggleText = toggleBtn.querySelector(".toggle-text");
+
+  toggleBtn.addEventListener("click", () => {
+    const isExpanded = list.classList.toggle("is-expanded");
+    toggleBtn.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+
+    if (isExpanded) {
+      if (toggleText) toggleText.textContent = "সংক্ষিপ্ত করুন";
+    } else {
+      if (toggleText) toggleText.textContent = "✨ আরও ১৪টি স্লিপিং ডেট দেখুন";
+      // Smoothly scroll back if user collapsed while scrolled deep
+      const showcase = document.querySelector(".sleep-showcase");
+      if (showcase) {
+        showcase.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    }
+  });
 }
 
 /**

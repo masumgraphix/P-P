@@ -2143,6 +2143,100 @@ h1, h2, h3, h4, h5 {
   font-size: 0.65rem;
 }
 
+.sleep-item.latest-highlight {
+  background: linear-gradient(135deg, rgba(245, 243, 255, 0.98), rgba(237, 233, 254, 0.98));
+  border-color: rgba(139, 92, 246, 0.45);
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.16);
+}
+
+.sleep-item.latest-highlight .sleep-order {
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.35);
+}
+
+.sleep-item.latest-highlight .sleep-item-title {
+  color: #4c1d95;
+  font-weight: 800;
+}
+
+.sleep-item.latest-highlight .sleep-item-sub {
+  color: #d946ef;
+  font-weight: 600;
+}
+
+/* Sleeping Dates Collapsible Logic */
+.sleep-item.sleep-item-hidden {
+  display: none;
+}
+
+.sleep-dates-list.is-expanded .sleep-item.sleep-item-hidden {
+  display: flex;
+  animation: sleepItemFadeIn 0.32s ease forwards;
+}
+
+@keyframes sleepItemFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* See More / Less Button Wrapper */
+.sleep-toggle-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.85rem;
+  padding-top: 0.65rem;
+  border-top: 1px dashed rgba(139, 92, 246, 0.25);
+}
+
+.sleep-see-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.45rem 1.15rem;
+  background: linear-gradient(135deg, rgba(245, 243, 255, 0.95), rgba(237, 233, 254, 0.95));
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  border-radius: 20px;
+  color: #6d28d9;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.12);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.sleep-see-more-btn:hover {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  border-color: #6d28d9;
+  color: #ffffff;
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.28);
+}
+
+.sleep-see-more-btn:active {
+  transform: scale(0.97);
+}
+
+.sleep-see-more-btn .toggle-icon {
+  font-size: 0.65rem;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.sleep-dates-list.is-expanded + .sleep-toggle-wrap .sleep-see-more-btn .toggle-icon {
+  transform: rotate(180deg);
+}
+
 /* Sleep & Rickshaw Highlight Boxes */
 .date-highlight-box {
   display: flex;
