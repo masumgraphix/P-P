@@ -40,6 +40,7 @@
         <li><a href="#dreams"><span class="link-full">স্বপ্নজাল</span><span class="link-short">স্বপ্ন</span></a></li>
         <li><a href="#vibe"><span class="link-full">ভাইব ম্যাচ</span><span class="link-short">ভাইব</span></a></li>
         <li><a href="#game"><span class="link-full">আর্কেড গেইম</span><span class="link-short">গেইম</span></a></li>
+        <li><a href="#certificate"><span class="link-full">Certificate</span><span class="link-short">Certificate</span></a></li>
       </ul>
       <button id="sparkle-btn" class="pill-btn sparkle-pill" title="ভালোবাসার আনন্দ উদযাপন করুন!">
         <span class="btn-icon">✨</span>
@@ -1024,6 +1025,64 @@
 
       </div>
     </section>
+
+    <!-- ==================== 7. CERTIFICATE ==================== -->
+    <section id="certificate" class="section certificate-section">
+      <div class="container">
+
+        <div class="section-header reveal-fade">
+          <span class="section-pill-tag">🏆 ভালোবাসার স্বীকৃতি</span>
+          <h2 class="section-title">
+            সার্টিফিকেট <span class="gradient-text">মেকার</span>
+            <span class="title-icon">📜</span>
+          </h2>
+          <p class="section-intro">
+            মনের মানুষটার জন্য একটা অফিসিয়াল (!) সার্টিফিকেট বানিয়ে ফেলুন — টেমপ্লেট বেছে নিন, নাম লিখুন, ডাউনলোড করে উপহার দিন!
+          </p>
+        </div>
+
+        <div class="cert-builder glass-card reveal-fade">
+
+          <h3 class="cert-step-title"><span class="step-num">১</span> টেমপ্লেট বেছে নিন</h3>
+          <div class="cert-templates" id="cert-templates"></div>
+
+          <h3 class="cert-step-title"><span class="step-num">২</span> তথ্য দিন</h3>
+          <div class="cert-form-grid">
+            <label class="cert-field">
+              <span class="cert-label">আপনার নাম 💁</span>
+              <input type="text" id="cert-name1" class="cert-input" placeholder="যেমন: Partner" maxlength="30" autocomplete="off">
+            </label>
+            <label class="cert-field">
+              <span class="cert-label">প্রিয়জনের নাম 💁‍♀️</span>
+              <input type="text" id="cert-name2" class="cert-input" placeholder="যেমন: Picchi" maxlength="30" autocomplete="off">
+            </label>
+            <label class="cert-field">
+              <span class="cert-label">তারিখ 📅</span>
+              <input type="date" id="cert-date" class="cert-input">
+            </label>
+            <label class="cert-field cert-field-full">
+              <span class="cert-label">বিশেষ বার্তা 💌 <small>(খালি রাখলে ডিফল্ট বার্তা বসবে)</small></span>
+              <textarea id="cert-message" class="cert-input cert-textarea" rows="2" maxlength="180" placeholder="মনের কথা লিখুন..."></textarea>
+            </label>
+          </div>
+
+          <h3 class="cert-step-title"><span class="step-num">৩</span> প্রিভিউ ও ডাউনলোড</h3>
+          <div class="cert-preview-wrap">
+            <canvas id="cert-canvas" width="1200" height="850" aria-label="Certificate preview"></canvas>
+          </div>
+          <div class="cert-actions">
+            <button id="cert-download-png" class="pill-btn primary-btn" type="button">
+              <span>⬇️ PNG ডাউনলোড</span>
+            </button>
+            <button id="cert-download-jpg" class="pill-btn secondary-btn" type="button">
+              <span>⬇️ JPG ডাউনলোড</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
   </main>
 
   <!-- ==================== 6. FOOTER ==================== -->
@@ -1142,5 +1201,6 @@
   </aside>
 
   <script src="script.js"></script>
+  <script src="cert.js"></script>
 </body>
 </html>
