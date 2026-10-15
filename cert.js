@@ -414,6 +414,28 @@ function initCertificateMaker() {
     return lines;
   }
 
+  /* Optical centering: script/calligraphy fonts have asymmetric side
+     bearings, so plain textAlign=center can look shifted. This centers
+     the actual ink using measured bounding boxes. */
+  function drawOpticallyCentered(text, y, font, color, spacing) {
+    ctx.font = font;
+    ctx.fillStyle = color;
+    ctx.textBaseline = "middle";
+    try { ctx.letterSpacing = spacing || "0px"; } catch (e) {}
+    let dx = 0;
+    try {
+      const m = ctx.measureText(text);
+      if (typeof m.actualBoundingBoxLeft === "number" &&
+          typeof m.actualBoundingBoxRight === "number") {
+        dx = (m.actualBoundingBoxLeft - m.actualBoundingBoxRight) / 2;
+      }
+    } catch (e) {}
+    ctx.textAlign = "left";
+    ctx.fillText(text, W / 2 + dx, y);
+    ctx.textAlign = "center";
+    try { ctx.letterSpacing = "0px"; } catch (e) {}
+  }
+
   function drawCentered(text, y, font, color, spacing) {
     ctx.font = font;
     ctx.fillStyle = color;
@@ -461,7 +483,9 @@ function initCertificateMaker() {
     ctx.fillText(selected.emoji, W / 2, 130);
     drawCentered("★  O F F I C I A L  ★", 196, "600 20px Poppins, sans-serif", c.accent);
 
-    drawCentered(
+    const isScriptTitle = selected.titleFont.indexOf("Great Vibes") !== -1;
+    const titleDrawFn = isScriptTitle ? drawOpticallyCentered : drawCentered;
+    titleDrawFn(
       selected.nameEn, 250,
       fitFont(selected.nameEn, selected.titleSize, 980, selected.titleFont, selected.titleWeight),
       c.accentDark, selected.letterSpace
@@ -481,7 +505,7 @@ function initCertificateMaker() {
     drawCentered(selected.presentLine, 394, "500 26px 'Hind Siliguri', sans-serif", c.ink);
 
     const names = name1 + "  ❤  " + name2;
-    drawCentered(
+    drawOpticallyCentered(
       names, 470,
       fitFont(names, 84, 960, "'Great Vibes', cursive", "400"),
       c.accentDark
