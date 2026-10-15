@@ -5284,3 +5284,175 @@ h1, h2, h3, h4, h5 {
 }
 
 
+
+/* ==================== CERTIFICATE MAKER ==================== */
+.cert-builder {
+  padding: clamp(20px, 4vw, 44px);
+  border-radius: 28px;
+}
+
+.cert-step-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: "Baloo Da 2", "Hind Siliguri", sans-serif;
+  font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+  font-weight: 700;
+  color: #9d174d;
+  margin: 28px 0 16px;
+}
+
+.cert-step-title:first-of-type {
+  margin-top: 4px;
+}
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff2d78, #ff7a45);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 800;
+  box-shadow: 0 4px 14px rgba(255, 45, 120, 0.35);
+  flex-shrink: 0;
+}
+
+.cert-templates {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+.cert-template-card {
+  border: 2px solid rgba(255, 45, 120, 0.18);
+  border-radius: 20px;
+  padding: 18px 12px;
+  text-align: center;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.55);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.cert-template-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(255, 45, 120, 0.18);
+}
+
+.cert-template-card.selected {
+  border-color: #ff2d78;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(255, 45, 120, 0.28);
+  transform: translateY(-4px);
+}
+
+.cert-template-emoji {
+  font-size: 2.4rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.cert-template-name {
+  display: block;
+  font-family: "Baloo Da 2", "Hind Siliguri", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #831843;
+}
+
+.cert-template-sub {
+  display: block;
+  font-size: 0.8rem;
+  color: #a21caf;
+  margin-top: 2px;
+}
+
+.cert-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.cert-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cert-field-full {
+  grid-column: 1 / -1;
+}
+
+.cert-label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #831843;
+  font-family: "Hind Siliguri", sans-serif;
+}
+
+.cert-label small {
+  font-weight: 400;
+  color: #a21caf;
+  font-size: 0.8rem;
+}
+
+.cert-input {
+  border: 2px solid rgba(255, 45, 120, 0.2);
+  border-radius: 16px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  font-family: "Hind Siliguri", "Baloo Da 2", sans-serif;
+  background: rgba(255, 255, 255, 0.75);
+  color: #4a044e;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cert-input:focus {
+  border-color: #ff2d78;
+  box-shadow: 0 0 0 4px rgba(255, 45, 120, 0.12);
+}
+
+.cert-textarea {
+  resize: vertical;
+  min-height: 64px;
+}
+
+.cert-preview-wrap {
+  display: flex;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  padding: 18px;
+  border: 2px dashed rgba(255, 45, 120, 0.25);
+}
+
+#cert-canvas {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
+  background: #fff;
+}
+
+.cert-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 22px;
+}
+
+@media (max-width: 640px) {
+  .cert-form-grid {
+    grid-template-columns: 1fr;
+  }
+  .cert-templates {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
