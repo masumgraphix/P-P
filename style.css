@@ -5512,3 +5512,16 @@ h1, h2, h3, h4, h5 {
     font-size: 0.58rem;
   }
 }
+
+/* ==================== CERT FORM OVERFLOW FIX ==================== */
+.cert-field {
+  min-width: 0; /* grid item blowout protirodh */
+}
+.cert-input {
+  max-width: 100%;
+  min-width: 0;
+}
+input[type="date"].cert-input {
+  min-height: 52px;
+  -webkit-min-logical-width: 100%;
+}
