@@ -5456,3 +5456,59 @@ h1, h2, h3, h4, h5 {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* ==================== NAVBAR MOBILE OVERFLOW FIX (7 links) ==================== */
+@media (max-width: 768px) {
+  .navbar {
+    overflow: hidden; /* capsule kokhono leak korbe na */
+  }
+  .nav-links {
+    flex: 1 1 auto;
+    min-width: 0;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+  .nav-links li {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .navbar {
+    gap: 0.3rem;
+  }
+  .nav-links {
+    gap: 0.42rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .navbar .sparkle-pill .btn-text {
+    display: none; /* tiny screen e shudhu icon */
+  }
+  .navbar .sparkle-pill {
+    padding: 0.18rem 0.42rem;
+  }
+  .nav-links {
+    gap: 0.3rem;
+  }
+  .nav-links a {
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .nav-logo {
+    font-size: 0.6rem;
+  }
+  .nav-links a {
+    font-size: 0.58rem;
+  }
+}
