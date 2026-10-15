@@ -422,16 +422,28 @@ function initCertificateMaker() {
     ctx.fillStyle = color;
     ctx.textBaseline = "middle";
     try { ctx.letterSpacing = spacing || "0px"; } catch (e) {}
+    // Use optical centering only when the browser actually provides
+    // bounding-box metrics; otherwise fall back to plain centered text.
+    // (Some in-app webviews don't report these metrics — drawing with
+    // textAlign="left" there would push the text to the side.)
+    let useOptical = false;
     let dx = 0;
     try {
       const m = ctx.measureText(text);
       if (typeof m.actualBoundingBoxLeft === "number" &&
-          typeof m.actualBoundingBoxRight === "number") {
+          typeof m.actualBoundingBoxRight === "number" &&
+          m.actualBoundingBoxRight > 0) {
         dx = (m.actualBoundingBoxLeft - m.actualBoundingBoxRight) / 2;
+        useOptical = true;
       }
     } catch (e) {}
-    ctx.textAlign = "left";
-    ctx.fillText(text, W / 2 + dx, y);
+    if (useOptical) {
+      ctx.textAlign = "left";
+      ctx.fillText(text, W / 2 + dx, y);
+    } else {
+      ctx.textAlign = "center";
+      ctx.fillText(text, W / 2, y);
+    }
     ctx.textAlign = "center";
     try { ctx.letterSpacing = "0px"; } catch (e) {}
   }
