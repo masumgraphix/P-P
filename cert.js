@@ -576,8 +576,37 @@ function initCertificateMaker() {
   }
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initCertificateMaker);
-} else {
+/* Lazy boot: certificate fonts + canvas work only run when the user
+   scrolls near the #certificate section, so initial page load stays fast. */
+function bootCertificateMaker() {
+  if (window.__certBooted) return;
+  window.__certBooted = true;
   initCertificateMaker();
+}
+
+function setupCertLazyBoot() {
+  const section = document.getElementById("certificate");
+  if (!section || !("IntersectionObserver" in window)) {
+    bootCertificateMaker();
+    return;
+  }
+  if (window.location && window.location.hash === "#certificate") {
+    bootCertificateMaker();
+    return;
+  }
+  const io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        bootCertificateMaker();
+        io.disconnect();
+      }
+    });
+  }, { rootMargin: "600px 0px" });
+  io.observe(section);
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", setupCertLazyBoot);
+} else {
+  setupCertLazyBoot();
 }
