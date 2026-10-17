@@ -799,13 +799,17 @@ h1, h2, h3, h4, h5 {
   height: 86.4%;
   width: 39.6%;
   z-index: 3;
-  padding: 1.2rem 1.4rem;
+  padding: 1.3rem 1.35rem 1.1rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   box-sizing: border-box;
   transition: opacity 0.3s ease;
+}
+
+.diary-page-half:has(.scrapbook-photo-box) {
+  justify-content: center;
 }
 
 .left-page-half {
@@ -849,7 +853,7 @@ h1, h2, h3, h4, h5 {
   height: 100%;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  padding: 1.2rem 1.4rem;
+  padding: 1.3rem 1.35rem 1.1rem;
   box-sizing: border-box;
   background: #faf5e8;
   background-image: repeating-linear-gradient(transparent, transparent 24px, rgba(160, 130, 90, 0.09) 24px, rgba(160, 130, 90, 0.09) 25px);
@@ -857,7 +861,7 @@ h1, h2, h3, h4, h5 {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .leaf-front {
@@ -1007,52 +1011,67 @@ h1, h2, h3, h4, h5 {
    ========================================================================== */
 .diary-written-content {
   font-family: var(--font-bengali);
-  text-align: left;
-  padding: 0 0.4rem;
+  padding: 0 0.35rem;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .diary-chapter-tag {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 700;
   color: var(--primary-pink);
   background: rgba(255, 45, 120, 0.1);
   border-radius: var(--border-radius-pill);
-  padding: 0.18rem 0.65rem;
-  margin-bottom: 0.5rem;
+  padding: 0.16rem 0.6rem;
+  margin-bottom: 0.4rem;
+  align-self: flex-start;
+  text-align: left;
 }
 
 .diary-note-title {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 800;
   color: #2e1d15;
-  margin-bottom: 0.45rem;
-  line-height: 1.35;
+  margin-bottom: 0.4rem;
+  line-height: 1.32;
+  text-align: left;
 }
 
 .diary-note-p {
-  font-size: 0.86rem;
+  font-size: 0.84rem;
   color: #4b362a;
-  line-height: 1.68;
-  margin-bottom: 0.55rem;
+  line-height: 1.62;
+  margin-bottom: 0.45rem;
+  text-align: justify;
+  text-justify: inter-word;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 .diary-note-quote {
   font-style: italic;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: #9f1239;
   border-left: 2.5px solid var(--primary-pink);
-  padding-left: 0.6rem;
-  margin-top: 0.5rem;
+  padding-left: 0.55rem;
+  margin-top: 0.25rem;
   line-height: 1.45;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .diary-note-quote .dialogue-turn {
   display: block;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.22rem;
   line-height: 1.45;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .diary-note-quote .dialogue-turn:last-child {
@@ -1070,10 +1089,12 @@ h1, h2, h3, h4, h5 {
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  margin-top: 0.6rem;
-  font-size: 0.74rem;
+  margin-top: auto;
+  padding-top: 0.35rem;
+  font-size: 0.72rem;
   color: #8c6a58;
   font-weight: 600;
+  text-align: left;
 }
 
 .diary-note-footnote span {
@@ -2144,6 +2165,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .sleep-item.latest-highlight {
+  grid-column: 1 / -1;
   background: linear-gradient(135deg, rgba(245, 243, 255, 0.98), rgba(237, 233, 254, 0.98));
   border-color: rgba(139, 92, 246, 0.45);
   box-shadow: 0 4px 14px rgba(139, 92, 246, 0.16);
@@ -3568,14 +3590,23 @@ h1, h2, h3, h4, h5 {
     height: 89%;
     width: 40.8%;
     z-index: 4;
-    overflow: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
     display: flex !important;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     box-sizing: border-box;
     transition: opacity 0.3s ease;
     background: none !important;
     min-height: auto !important;
+  }
+
+  .diary-page-half::-webkit-scrollbar {
+    display: none;
+  }
+
+  .diary-page-half:has(.scrapbook-photo-box) {
+    justify-content: center;
   }
 
   .diary-page-half.left-page-half {
@@ -3596,6 +3627,7 @@ h1, h2, h3, h4, h5 {
     display: inline-flex;
     width: fit-content;
     border-radius: 20px;
+    align-self: flex-start;
   }
 
   .diary-note-title {
@@ -3604,6 +3636,7 @@ h1, h2, h3, h4, h5 {
     line-height: 1.25;
     margin-bottom: 0.35rem;
     color: #382215;
+    text-align: left;
   }
 
   .diary-note-p {
@@ -3611,6 +3644,8 @@ h1, h2, h3, h4, h5 {
     line-height: 1.4;
     color: #4a3628;
     margin-bottom: 0.35rem;
+    text-align: justify;
+    text-justify: inter-word;
   }
 
   .diary-note-quote {
@@ -3621,11 +3656,15 @@ h1, h2, h3, h4, h5 {
     margin-bottom: 0.3rem;
     font-style: italic;
     color: var(--primary-pink);
+    text-align: justify;
+    text-justify: inter-word;
   }
 
   .diary-note-footnote {
     font-size: 0.52rem;
     color: #8c735c;
+    margin-top: auto;
+    text-align: left;
   }
 
   .scrapbook-img {
@@ -3981,44 +4020,77 @@ h1, h2, h3, h4, h5 {
     min-height: 275px;
   }
 
+  .diary-page-half {
+    top: 5%;
+    height: 90%;
+    justify-content: flex-start !important;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .diary-page-half::-webkit-scrollbar {
+    display: none;
+  }
+
+  .diary-page-half:has(.scrapbook-photo-box) {
+    justify-content: center !important;
+  }
+
   .diary-page-half.left-page-half {
     left: 8%;
-    padding: 0.35rem 0.45rem;
+    padding: 0.3rem 0.38rem;
   }
 
   .diary-page-half.right-page-half {
     left: 51.5%;
-    padding: 0.35rem 0.45rem;
+    padding: 0.3rem 0.38rem;
   }
 
   .diary-chapter-tag {
-    font-size: 0.48rem;
-    padding: 2px 5px;
+    font-size: 0.44rem;
+    padding: 1px 5px;
     margin-bottom: 2px;
+    align-self: flex-start;
   }
 
   .diary-note-title {
-    font-size: 0.64rem;
+    font-size: 0.58rem;
     font-weight: 700;
-    line-height: 1.22;
-    margin-bottom: 3px;
+    line-height: 1.18;
+    margin-bottom: 2px;
+    text-align: left;
   }
 
   .diary-note-p {
-    font-size: 0.48rem;
-    line-height: 1.34;
-    margin-bottom: 3px;
+    font-size: 0.44rem;
+    line-height: 1.28;
+    margin-bottom: 2px;
+    text-align: justify;
+    text-justify: inter-word;
   }
 
   .diary-note-quote {
-    font-size: 0.44rem;
-    line-height: 1.25;
-    padding-left: 4px;
+    font-size: 0.40rem;
+    line-height: 1.2;
+    padding-left: 3px;
+    margin-top: 2px;
     margin-bottom: 2px;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  .diary-note-quote .dialogue-turn {
+    margin-bottom: 1px;
+    line-height: 1.2;
+    text-align: justify;
+    text-justify: inter-word;
   }
 
   .diary-note-footnote {
-    font-size: 0.41rem;
+    font-size: 0.38rem;
+    margin-top: auto;
+    padding-top: 2px;
+    text-align: left;
   }
 
   /* Memories & Dreams on 480px */
@@ -4258,31 +4330,40 @@ h1, h2, h3, h4, h5 {
   }
 
   .diary-chapter-tag {
-    font-size: 0.44rem;
+    font-size: 0.42rem;
     padding: 1px 4px;
     margin-bottom: 1px;
+    align-self: flex-start;
   }
 
   .diary-note-title {
-    font-size: 0.58rem;
-    line-height: 1.2;
+    font-size: 0.54rem;
+    line-height: 1.18;
     margin-bottom: 2px;
+    text-align: left;
   }
 
   .diary-note-p {
-    font-size: 0.44rem;
-    line-height: 1.3;
+    font-size: 0.42rem;
+    line-height: 1.25;
     margin-bottom: 2px;
+    text-align: justify;
+    text-justify: inter-word;
   }
 
   .diary-note-quote {
-    font-size: 0.40rem;
-    line-height: 1.22;
+    font-size: 0.38rem;
+    line-height: 1.2;
     margin-bottom: 2px;
+    text-align: justify;
+    text-justify: inter-word;
   }
 
   .diary-note-footnote {
-    font-size: 0.38rem;
+    font-size: 0.36rem;
+    margin-top: auto;
+    padding-top: 1px;
+    text-align: left;
   }
 }
 

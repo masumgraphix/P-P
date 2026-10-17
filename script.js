@@ -292,9 +292,9 @@ const STORY_CONFIG = {
 
   // 5. Virtual Dates Breakdown (Our Special Online Dates)
   virtualDates: {
-    total: 37,
+    total: 42,
     movieDates: {
-      count: 8,
+      count: 10,
       movies: [
         { order: "১ম", name: "Blast", icon: "💥" },
         { order: "২য়", name: "Ratsasan", icon: "🎭" },
@@ -303,11 +303,13 @@ const STORY_CONFIG = {
         { order: "৫ম", name: "Makkhi", icon: "🎬", date: "১৬ সেপ্টেম্বর ২০২৬" },
         { order: "৬ষ্ঠ", name: "Total Dhamaal", icon: "😂", date: "২৪ সেপ্টেম্বর ২০২৬" },
         { order: "৭ম", name: "Bhool Bhulaiyaa", icon: "👻", date: "১ অক্টোবর ২০২৬" },
-        { order: "৮ম", name: "Black (South Movie)", icon: "🎬", date: "২ অক্টোবর ২০২৬" }
+        { order: "৮ম", name: "Black (South Movie)", icon: "🎬", date: "২ অক্টোবর ২০২৬" },
+        { order: "৯ম", name: "Jai Bhim", icon: "⚖️" },
+        { order: "১০ম", name: "Jailer 2", icon: "🎬" }
       ]
     },
     sleepingDates: {
-      count: 28,
+      count: 31,
       history: [
         { order: "১ম", title: "প্রথম স্লিপিং ডেট", date: null },
         { order: "২য়", title: "দ্বিতীয় স্লিপিং ডেট", date: null },
@@ -336,7 +338,10 @@ const STORY_CONFIG = {
         { order: "২৫তম", title: "পঞ্চবিংশ স্লিপিং ডেট", date: "১০ অক্টোবর ২০২৬" },
         { order: "২৬তম", title: "ষড়বিংশ স্লিপিং ডেট", date: "১১ অক্টোবর ২০২৬" },
         { order: "২৭তম", title: "সপ্তবিংশ স্লিপিং ডেট", date: "১২ অক্টোবর ২০২৬" },
-        { order: "২৮তম", title: "অষ্টাবিংশ স্লিপিং ডেট", date: "১৩ অক্টোবর ২০২৬", note: "আজকের অন-কল ঘুম 💖💤" }
+        { order: "২৮তম", title: "অষ্টাবিংশ স্লিপিং ডেট", date: "১৩ অক্টোবর ২০২৬" },
+        { order: "২৯তম", title: "ঊনত্রিংশ স্লিপিং ডেট", date: "১৪ অক্টোবর ২০২৬" },
+        { order: "৩০তম", title: "ত্রিংশ স্লিপিং ডেট", date: "১৫ অক্টোবর ২০২৬" },
+        { order: "৩১তম", title: "একত্রিংশ স্লিপিং ডেট", date: "১৬ অক্টোবর ২০২৬", note: "আজকের অন-কল ঘুম 💖💤" }
       ],
       description: "ফোনের লাইনে একে অপরকে রেখে নিশ্চিন্ত ঘুম"
     },
@@ -1338,7 +1343,8 @@ function initSleepingDatesToggle() {
     if (isExpanded) {
       if (toggleText) toggleText.textContent = "সংক্ষিপ্ত করুন";
     } else {
-      if (toggleText) toggleText.textContent = "✨ আরও ১৪টি স্লিপিং ডেট দেখুন";
+      const hiddenCount = list.querySelectorAll(".sleep-item-hidden").length;
+      if (toggleText) toggleText.textContent = `✨ আরও ${toBnNum(hiddenCount)}টি স্লিপিং ডেট দেখুন`;
       // Smoothly scroll back if user collapsed while scrolled deep
       const showcase = document.querySelector(".sleep-showcase");
       if (showcase) {
