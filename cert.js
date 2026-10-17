@@ -414,37 +414,31 @@ function initCertificateMaker() {
     return lines;
   }
 
-  /* Optical centering: script/calligraphy fonts have asymmetric side
-     bearings, so plain textAlign=center can look shifted. This centers
-     the actual ink using measured bounding boxes. */
+  /* Centering helper for certificate titles and names:
+     Uses textAlign = "center" so text is anchored at the exact horizontal center of the canvas.
+     Optionally applies a subtle optical nudge when asymmetrical calligraphy ink metrics are available. */
   function drawOpticallyCentered(text, y, font, color, spacing) {
     ctx.font = font;
     ctx.fillStyle = color;
+    ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     try { ctx.letterSpacing = spacing || "0px"; } catch (e) {}
-    // Use optical centering only when the browser actually provides
-    // bounding-box metrics; otherwise fall back to plain centered text.
-    // (Some in-app webviews don't report these metrics — drawing with
-    // textAlign="left" there would push the text to the side.)
-    let useOptical = false;
+
     let dx = 0;
     try {
       const m = ctx.measureText(text);
       if (typeof m.actualBoundingBoxLeft === "number" &&
           typeof m.actualBoundingBoxRight === "number" &&
           m.actualBoundingBoxRight > 0) {
-        dx = (m.actualBoundingBoxLeft - m.actualBoundingBoxRight) / 2;
-        useOptical = true;
+        const diff = (m.actualBoundingBoxLeft - m.actualBoundingBoxRight) / 2;
+        if (Math.abs(diff) <= 15) {
+          dx = diff;
+        }
       }
     } catch (e) {}
-    if (useOptical) {
-      ctx.textAlign = "left";
-      ctx.fillText(text, W / 2 + dx, y);
-    } else {
-      ctx.textAlign = "center";
-      ctx.fillText(text, W / 2, y);
-    }
+
     ctx.textAlign = "center";
+    ctx.fillText(text, W / 2 + dx, y);
     try { ctx.letterSpacing = "0px"; } catch (e) {}
   }
 
