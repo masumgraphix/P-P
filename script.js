@@ -783,7 +783,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initVibeStats();
   initScrollAnimations();
   initFloatingHeartInteractions();
-  initArcadeGame();
   initSleepingDatesToggle();
 });
 
