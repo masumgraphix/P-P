@@ -1,0 +1,352 @@
+rules_version = '2';
+
+// ===============================================================
+// Assumed Data Model
+// ===============================================================
+//
+// Application: Partner & Picchi Diaries
+// Primary Storage: Cloud Firestore
+//
+// 1. Primary Collection: diaries
+//    Document ID: docId (e.g., 'main')
+//    Fields:
+//      - names: map (required)
+//          - person1: string (required, 1-100 chars)
+//          - person2: string (required, 1-100 chars)
+//          - brandTitle: string (required, 1-150 chars)
+//          - subheadline: string (optional, 0-500 chars)
+//          - closingQuote: string (optional, 0-1000 chars)
+//          - credits: string (optional, 0-150 chars)
+//      - startDate: string (required, 4-50 chars, ISO 8601 or date string)
+//      - startDateFormatted: string (optional, 0-100 chars)
+//      - diarySpreads: list of maps (optional, max 50 items)
+//      - chatMemories: list of maps (optional, max 100 items)
+//      - virtualDates: map (optional, max 10 keys: total, movieDates, sleepingDates, rickshawDates, description)
+//      - partnerDreams: list of maps (optional, max 50 items)
+//      - picchiDreams: list of maps (optional, max 50 items)
+//      - vibeStats: map (optional, max 10 keys: overallPercentage, overallTagline, categories, vibeMatches)
+//      - title: string (optional, 0-200 chars)
+//      - description: string (optional, 0-2000 chars)
+//      - status: string (optional, 'draft' | 'published' | 'archived')
+//      - version: number (optional, integer 1 to 1,000,000)
+//      - createdAt: timestamp (optional, immutable once written)
+//      - updatedAt: timestamp (optional)
+//      - updatedBy: string (optional, 1-128 chars UID or identifier)
+//
+// 2. Collection / Subcollection: moments
+//    Path: /moments/{momentId} OR /diaries/{docId}/moments/{momentId}
+//    Fields:
+//      - title: string (required, 1-200 chars)
+//      - quote: string (optional, 0-1000 chars)
+//      - caption: string (optional, 0-2000 chars)
+//      - image: string (optional, 0-500 chars)
+//      - tag: string (optional, 0-100 chars)
+//      - reaction: string (optional, 0-30 chars)
+//      - dateTag: string (optional, 0-100 chars)
+//      - sender: string (optional, 0-100 chars)
+//      - avatarLetter: string (optional, 0-10 chars)
+//      - status: string (optional, 0-50 chars)
+//      - order: number (optional)
+//      - createdAt: timestamp (optional, immutable once written)
+//      - updatedAt: timestamp (optional)
+//      - authorUid: string (optional, 1-128 chars)
+//
+// 3. Collection / Subcollection: dates
+//    Path: /dates/{dateId} OR /diaries/{docId}/dates/{dateId}
+//    Fields:
+//      - type: string (required, 'movie' | 'sleeping' | 'rickshaw' | 'special' | 'other')
+//      - order: string or number (optional, max 50 chars if string)
+//      - title: string (optional, 0-200 chars)
+//      - name: string (optional, 0-200 chars)
+//      - date: string (optional, 0-100 chars)
+//      - note: string (optional, 0-1000 chars)
+//      - icon: string (optional, 0-30 chars)
+//      - description: string (optional, 0-1000 chars)
+//      - createdAt: timestamp (optional, immutable once written)
+//      - updatedAt: timestamp (optional)
+//      - authorUid: string (optional, 1-128 chars)
+//
+// ===============================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+
+    // Check if user is authenticated via Firebase Auth
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Check if user is an authorized admin / writer
+    function isAuthorizedWriter() {
+      return isAuthenticated();
+    }
+
+    // Check if data map contains all required fields
+    function hasRequiredFields(data, fields) {
+      return data.keys().hasAll(fields);
+    }
+
+    // Check if data map contains only allowed fields (strictly preventing schema pollution)
+    function hasOnlyAllowedFields(data, fields) {
+      return data.keys().hasOnly(fields);
+    }
+
+    // Validate immutable field remains unchanged during update if already present
+    function isImmutableFieldUnchanged(field) {
+      return !(field in resource.data) ||
+        (field in request.resource.data && request.resource.data[field] == resource.data[field]);
+    }
+
+    // Validate optional string field (if present, must be string and within length bounds)
+    function isValidOptionalString(data, field, minLen, maxLen) {
+      return !(field in data) ||
+        (data[field] is string &&
+         data[field].size() >= minLen &&
+         data[field].size() <= maxLen);
+    }
+
+    // Validate optional timestamp field
+    function isValidOptionalTimestamp(data, field) {
+      return !(field in data) || (data[field] is timestamp);
+    }
+
+    // Validate optional number field within range
+    function isValidOptionalNumber(data, field, minVal, maxVal) {
+      return !(field in data) ||
+        (data[field] is number &&
+         data[field] >= minVal &&
+         data[field] <= maxVal);
+    }
+
+    // ===============================================================
+    // Domain Validators: Diaries
+    // ===============================================================
+
+    // Validate names map structure and string lengths
+    function isValidNamesMap(namesMap) {
+      return namesMap is map &&
+        namesMap.keys().hasAll(['person1', 'person2', 'brandTitle']) &&
+        namesMap.keys().hasOnly(['person1', 'person2', 'brandTitle', 'subheadline', 'closingQuote', 'credits']) &&
+        namesMap.person1 is string && namesMap.person1.size() > 0 && namesMap.person1.size() <= 100 &&
+        namesMap.person2 is string && namesMap.person2.size() > 0 && namesMap.person2.size() <= 100 &&
+        namesMap.brandTitle is string && namesMap.brandTitle.size() > 0 && namesMap.brandTitle.size() <= 150 &&
+        (!('subheadline' in namesMap) || (namesMap.subheadline is string && namesMap.subheadline.size() <= 500)) &&
+        (!('closingQuote' in namesMap) || (namesMap.closingQuote is string && namesMap.closingQuote.size() <= 1000)) &&
+        (!('credits' in namesMap) || (namesMap.credits is string && namesMap.credits.size() <= 150));
+    }
+
+    // Validate virtualDates map structure
+    function isValidVirtualDatesMap(vd) {
+      return vd is map &&
+        vd.keys().hasOnly(['total', 'movieDates', 'sleepingDates', 'rickshawDates', 'description']) &&
+        (!('total' in vd) || (vd.total is number && vd.total >= 0 && vd.total <= 10000)) &&
+        (!('movieDates' in vd) || (vd.movieDates is map)) &&
+        (!('sleepingDates' in vd) || (vd.sleepingDates is map)) &&
+        (!('rickshawDates' in vd) || (vd.rickshawDates is map)) &&
+        (!('description' in vd) || (vd.description is string && vd.description.size() <= 500));
+    }
+
+    // Validate vibeStats map structure
+    function isValidVibeStatsMap(vs) {
+      return vs is map &&
+        vs.keys().hasOnly(['overallPercentage', 'overallTagline', 'categories', 'vibeMatches']) &&
+        (!('overallPercentage' in vs) || (vs.overallPercentage is number && vs.overallPercentage >= 0 && vs.overallPercentage <= 100)) &&
+        (!('overallTagline' in vs) || (vs.overallTagline is string && vs.overallTagline.size() <= 300)) &&
+        (!('categories' in vs) || (vs.categories is list && vs.categories.size() <= 20)) &&
+        (!('vibeMatches' in vs) || (vs.vibeMatches is list && vs.vibeMatches.size() <= 30));
+    }
+
+    // Main validator for Diary Document (enforced on both create and update)
+    function isValidDiaryDocument(data) {
+      return hasRequiredFields(data, ['names', 'startDate']) &&
+        hasOnlyAllowedFields(data, [
+          'names',
+          'startDate',
+          'startDateFormatted',
+          'diarySpreads',
+          'chatMemories',
+          'virtualDates',
+          'partnerDreams',
+          'picchiDreams',
+          'vibeStats',
+          'title',
+          'description',
+          'status',
+          'version',
+          'createdAt',
+          'updatedAt',
+          'updatedBy'
+        ]) &&
+        isValidNamesMap(data.names) &&
+        (data.startDate is string && data.startDate.size() >= 4 && data.startDate.size() <= 50) &&
+        isValidOptionalString(data, 'startDateFormatted', 0, 100) &&
+        (!('diarySpreads' in data) || (data.diarySpreads is list && data.diarySpreads.size() <= 50)) &&
+        (!('chatMemories' in data) || (data.chatMemories is list && data.chatMemories.size() <= 100)) &&
+        (!('virtualDates' in data) || isValidVirtualDatesMap(data.virtualDates)) &&
+        (!('partnerDreams' in data) || (data.partnerDreams is list && data.partnerDreams.size() <= 50)) &&
+        (!('picchiDreams' in data) || (data.picchiDreams is list && data.picchiDreams.size() <= 50)) &&
+        (!('vibeStats' in data) || isValidVibeStatsMap(data.vibeStats)) &&
+        isValidOptionalString(data, 'title', 0, 200) &&
+        isValidOptionalString(data, 'description', 0, 2000) &&
+        (!('status' in data) || (data.status is string && data.status in ['draft', 'published', 'archived'])) &&
+        isValidOptionalNumber(data, 'version', 1, 1000000) &&
+        isValidOptionalTimestamp(data, 'createdAt') &&
+        isValidOptionalTimestamp(data, 'updatedAt') &&
+        isValidOptionalString(data, 'updatedBy', 1, 128);
+    }
+
+    // Diary create validator
+    function isValidDiaryCreate(data) {
+      return isValidDiaryDocument(data);
+    }
+
+    // Diary update validator (enforces schema validation + immutable createdAt)
+    function isValidDiaryUpdate(data) {
+      return isValidDiaryDocument(data) &&
+        isImmutableFieldUnchanged('createdAt');
+    }
+
+    // ===============================================================
+    // Domain Validators: Moments
+    // ===============================================================
+
+    function isValidMoment(data) {
+      return hasRequiredFields(data, ['title']) &&
+        hasOnlyAllowedFields(data, [
+          'title',
+          'quote',
+          'caption',
+          'image',
+          'tag',
+          'reaction',
+          'dateTag',
+          'sender',
+          'avatarLetter',
+          'status',
+          'order',
+          'createdAt',
+          'updatedAt',
+          'authorUid'
+        ]) &&
+        (data.title is string && data.title.size() > 0 && data.title.size() <= 200) &&
+        isValidOptionalString(data, 'quote', 0, 1000) &&
+        isValidOptionalString(data, 'caption', 0, 2000) &&
+        isValidOptionalString(data, 'image', 0, 500) &&
+        isValidOptionalString(data, 'tag', 0, 100) &&
+        isValidOptionalString(data, 'reaction', 0, 30) &&
+        isValidOptionalString(data, 'dateTag', 0, 100) &&
+        isValidOptionalString(data, 'sender', 0, 100) &&
+        isValidOptionalString(data, 'avatarLetter', 0, 10) &&
+        isValidOptionalString(data, 'status', 0, 50) &&
+        (!('order' in data) || (data.order is number)) &&
+        isValidOptionalTimestamp(data, 'createdAt') &&
+        isValidOptionalTimestamp(data, 'updatedAt') &&
+        isValidOptionalString(data, 'authorUid', 1, 128);
+    }
+
+    // ===============================================================
+    // Domain Validators: Dates
+    // ===============================================================
+
+    function isValidDateEntry(data) {
+      return hasRequiredFields(data, ['type']) &&
+        hasOnlyAllowedFields(data, [
+          'type',
+          'order',
+          'title',
+          'name',
+          'date',
+          'note',
+          'icon',
+          'description',
+          'createdAt',
+          'updatedAt',
+          'authorUid'
+        ]) &&
+        (data.type is string && data.type in ['movie', 'sleeping', 'rickshaw', 'special', 'other']) &&
+        (!('order' in data) || (data.order is string && data.order.size() <= 50) || (data.order is number)) &&
+        isValidOptionalString(data, 'title', 0, 200) &&
+        isValidOptionalString(data, 'name', 0, 200) &&
+        isValidOptionalString(data, 'date', 0, 100) &&
+        isValidOptionalString(data, 'note', 0, 1000) &&
+        isValidOptionalString(data, 'icon', 0, 30) &&
+        isValidOptionalString(data, 'description', 0, 1000) &&
+        isValidOptionalTimestamp(data, 'createdAt') &&
+        isValidOptionalTimestamp(data, 'updatedAt') &&
+        isValidOptionalString(data, 'authorUid', 1, 128);
+    }
+
+    // ===============================================================
+    // Rules: Diaries Collection & Subcollections
+    // ===============================================================
+
+    match /diaries/{docId} {
+      // 1. Public read access for romantic story, moments, and dates (desktop & mobile)
+      allow read: if true;
+
+      // 2. Authenticated administrative writes with strict schema and size validation
+      allow create: if isAuthorizedWriter() && isValidDiaryCreate(request.resource.data);
+      allow update: if isAuthorizedWriter() && isValidDiaryUpdate(request.resource.data);
+
+      // Root diary document cannot be deleted (preserves core application state)
+      allow delete: if false;
+
+      // Optional subcollections under diaries/{docId}
+      match /moments/{momentId} {
+        allow read: if true;
+        allow create: if isAuthorizedWriter() && isValidMoment(request.resource.data);
+        allow update: if isAuthorizedWriter() && isValidMoment(request.resource.data) &&
+                      isImmutableFieldUnchanged('createdAt') &&
+                      isImmutableFieldUnchanged('authorUid');
+        allow delete: if isAuthorizedWriter();
+      }
+
+      match /dates/{dateId} {
+        allow read: if true;
+        allow create: if isAuthorizedWriter() && isValidDateEntry(request.resource.data);
+        allow update: if isAuthorizedWriter() && isValidDateEntry(request.resource.data) &&
+                      isImmutableFieldUnchanged('createdAt') &&
+                      isImmutableFieldUnchanged('authorUid');
+        allow delete: if isAuthorizedWriter();
+      }
+    }
+
+    // ===============================================================
+    // Rules: Top-Level Moments Collection (if used standalone)
+    // ===============================================================
+
+    match /moments/{momentId} {
+      allow read: if true;
+      allow create: if isAuthorizedWriter() && isValidMoment(request.resource.data);
+      allow update: if isAuthorizedWriter() && isValidMoment(request.resource.data) &&
+                    isImmutableFieldUnchanged('createdAt') &&
+                    isImmutableFieldUnchanged('authorUid');
+      allow delete: if isAuthorizedWriter();
+    }
+
+    // ===============================================================
+    // Rules: Top-Level Dates Collection (if used standalone)
+    // ===============================================================
+
+    match /dates/{dateId} {
+      allow read: if true;
+      allow create: if isAuthorizedWriter() && isValidDateEntry(request.resource.data);
+      allow update: if isAuthorizedWriter() && isValidDateEntry(request.resource.data) &&
+                    isImmutableFieldUnchanged('createdAt') &&
+                    isImmutableFieldUnchanged('authorUid');
+      allow delete: if isAuthorizedWriter();
+    }
+
+    // ===============================================================
+    // Default Deny Root Fallback
+    // ===============================================================
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -5606,3 +5606,172 @@ input[type="date"].cert-input {
   min-height: 52px;
   -webkit-min-logical-width: 100%;
 }
+
+
+/* ==========================================================================
+   VIDEO MOMENTS & LIGHTBOX VIDEO PLAYER STYLES
+   ========================================================================== */
+
+/* Video Badge on Moments Card */
+.video-badge-pill {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(15, 23, 42, 0.85);
+  color: #fbcfe8;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  letter-spacing: 0.2px;
+}
+
+/* Video Center Play Button Overlay */
+.video-play-center-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 45, 120, 0.9);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 8px 24px rgba(255, 45, 120, 0.5), 0 0 0 0 rgba(255, 45, 120, 0.5);
+  z-index: 3;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease, box-shadow 0.25s ease;
+  pointer-events: none;
+  animation: videoPlayPulse 2.4s infinite;
+}
+
+.video-play-center-btn .play-icon-triangle {
+  margin-left: 3px;
+  display: inline-block;
+}
+
+@keyframes videoPlayPulse {
+  0% {
+    box-shadow: 0 8px 24px rgba(255, 45, 120, 0.5), 0 0 0 0 rgba(255, 45, 120, 0.5);
+  }
+  70% {
+    box-shadow: 0 8px 24px rgba(255, 45, 120, 0.5), 0 0 0 16px rgba(255, 45, 120, 0);
+  }
+  100% {
+    box-shadow: 0 8px 24px rgba(255, 45, 120, 0.5), 0 0 0 0 rgba(255, 45, 120, 0);
+  }
+}
+
+.messenger-screenshot-frame:hover .video-play-center-btn {
+  transform: translate(-50%, -50%) scale(1.15);
+  background: #ff1f6d;
+}
+
+/* Video Thumbnail Placeholder (When no custom image poster is provided) */
+.video-thumbnail-placeholder {
+  width: 100%;
+  height: 220px;
+  background: linear-gradient(135deg, #1e1b4b 0%, #311042 50%, #4c0519 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fbcfe8;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-thumbnail-placeholder::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 107, 149, 0.2) 0%, transparent 70%);
+}
+
+.video-placeholder-label {
+  font-family: var(--font-bengali);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Lightbox Video & Iframe Player */
+.lightbox-full-video {
+  width: 100%;
+  max-height: 60vh;
+  border-radius: 16px;
+  background: #000000;
+  outline: none;
+  display: block;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-full-iframe {
+  width: 100%;
+  height: 340px;
+  max-height: 60vh;
+  border-radius: 16px;
+  border: none;
+  background: #000000;
+  display: block;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   FOOTER ADMIN LINK STYLES
+   ========================================================================== */
+.footer-admin-wrap {
+  margin-top: 1.6rem;
+  margin-bottom: 0.8rem;
+  display: flex;
+  justify-content: center;
+}
+
+.admin-panel-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.88);
+  font-family: var(--font-bengali);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.admin-panel-link:hover {
+  background: linear-gradient(135deg, rgba(255, 45, 120, 0.85), rgba(255, 112, 67, 0.85));
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(255, 45, 120, 0.35);
+}
+
+.admin-panel-link .admin-icon {
+  font-size: 0.95rem;
+  transition: transform 0.4s ease;
+}
+
+.admin-panel-link:hover .admin-icon {
+  transform: rotate(60deg);
+}

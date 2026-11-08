@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>💖 Partner &amp; Picchi Diaries — অ্যাডমিন প্যানেল</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- ==========================================
+       1. ROMANTIC PIN LOCK SCREEN
+       ========================================== -->
+  <div id="admin-lock-screen" class="lock-screen-wrap">
+    <div class="lock-ambient-hearts" aria-hidden="true">
+      <span class="ambient-heart h1">💖</span>
+      <span class="ambient-heart h2">✨</span>
+      <span class="ambient-heart h3">🌸</span>
+      <span class="ambient-heart h4">🌙</span>
+      <span class="ambient-heart h5">💕</span>
+    </div>
+
+    <div class="lock-card">
+      <div class="lock-icon-halo">
+        <span class="lock-icon">🔐</span>
+      </div>
+      <h1 class="lock-brand">Partner &amp; Picchi Diaries</h1>
+      <p class="lock-subtitle">আমাদের ডায়েরির অ্যাডমিন কন্ট্রোল প্যানেল</p>
+      
+      <div class="lock-form-wrap">
+        <label for="pin-input" class="lock-label">৪ ডিজিটের সিক্রেট পিন দিন:</label>
+        <div class="pin-field-row">
+          <input type="password" id="pin-input" class="pin-input" maxlength="8" placeholder="••••" inputmode="numeric" autocomplete="current-password" autofocus />
+          <button type="button" id="pin-toggle-visibility" class="pin-visibility-btn" title="পিন দেখুন/লুকান">👁️</button>
+        </div>
+
+        <div id="pin-error-msg" class="pin-error-msg" style="display: none;"></div>
+
+        <button type="button" id="pin-submit-btn" class="unlock-btn">
+          <span>ড্যাশবোর্ড আনলক করুন</span>
+          <span class="unlock-btn-icon">💖</span>
+        </button>
+
+        <!-- Quick Keypad for Mobile -->
+        <div class="quick-keypad" aria-label="PIN Keypad">
+          <button type="button" class="keypad-key" data-digit="1">1</button>
+          <button type="button" class="keypad-key" data-digit="2">2</button>
+          <button type="button" class="keypad-key" data-digit="3">3</button>
+          <button type="button" class="keypad-key" data-digit="4">4</button>
+          <button type="button" class="keypad-key" data-digit="5">5</button>
+          <button type="button" class="keypad-key" data-digit="6">6</button>
+          <button type="button" class="keypad-key" data-digit="7">7</button>
+          <button type="button" class="keypad-key" data-digit="8">8</button>
+          <button type="button" class="keypad-key" data-digit="9">9</button>
+          <button type="button" class="keypad-key key-clear" id="key-clear" title="ক্লিয়ার">C</button>
+          <button type="button" class="keypad-key" data-digit="0">0</button>
+          <button type="button" class="keypad-key key-backspace" id="key-backspace" title="মুছুন">⌫</button>
+        </div>
+
+        <p class="lock-hint">
+          <span class="hint-icon">💡</span> ডিফল্ট পিন: <strong>2026</strong> (ভিতরে সেটিংস থেকে যেকোনো সময় পরিবর্তন করা যাবে)
+        </p>
+        <a href="index.html" class="back-to-site-link">← মূল ওয়েবসাইটে ফিরে যান</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       2. MAIN ADMIN DASHBOARD (UNLOCKED)
+       ========================================== -->
+  <div id="admin-dashboard" class="dashboard-wrap" style="display: none;">
+    
+    <!-- Top Global Header -->
+    <header class="admin-header">
+      <div class="header-left">
+        <span class="header-logo-icon">💖</span>
+        <div class="header-titles">
+          <h2 class="header-title">Partner &amp; Picchi Diaries</h2>
+          <span class="header-badge">Admin Studio</span>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <div id="sync-status-badge" class="sync-status-badge badge-cloud">
+          <span class="sync-dot"></span>
+          <span id="sync-status-text">ক্লাউড সিঙ্ক সক্রিয়</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <a href="index.html" target="_blank" class="header-btn btn-view" title="নতুন ট্যাবে ওয়েবসাইট প্রিভিউ দেখুন">
+          <span>🌐</span> <span class="btn-text">ওয়েবসাইট দেখুন</span>
+        </a>
+        <button type="button" id="btn-global-save" class="header-btn btn-save" title="সমস্ত পরিবর্তন সাথে সাথে সাইটে লাইভ করুন">
+          <span>💾</span> <span class="btn-text">সেভ ও পাবলিশ</span>
+        </button>
+        <button type="button" id="btn-logout" class="header-btn btn-logout" title="লগআউট ও লক করুন">
+          <span>🔒</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Tab Navigation Bar -->
+    <nav class="admin-tab-nav" aria-label="Admin Navigation Tabs">
+      <div class="tabs-scroll-wrap">
+        <button type="button" class="tab-btn active" data-tab="panel-moments">
+          <span class="tab-icon">📸</span>
+          <span class="tab-label">মুহূর্ত ও ভিডিও</span>
+          <span class="tab-count" id="badge-count-moments">0</span>
+        </button>
+        <button type="button" class="tab-btn" data-tab="panel-diary">
+          <span class="tab-icon">📖</span>
+          <span class="tab-label">ডায়েরির গল্প</span>
+          <span class="tab-count" id="badge-count-chapters">0</span>
+        </button>
+        <button type="button" class="tab-btn" data-tab="panel-dates">
+          <span class="tab-icon">🍿</span>
+          <span class="tab-label">ভার্চুয়াল ডেট</span>
+          <span class="tab-count" id="badge-count-dates">0</span>
+        </button>
+        <button type="button" class="tab-btn" data-tab="panel-dreams">
+          <span class="tab-icon">🌙</span>
+          <span class="tab-label">স্বপ্নজাল</span>
+          <span class="tab-count" id="badge-count-dreams">0</span>
+        </button>
+        <button type="button" class="tab-btn" data-tab="panel-profile">
+          <span class="tab-icon">⚙️</span>
+          <span class="tab-label">প্রোফাইল সেটিংস</span>
+        </button>
+        <button type="button" class="tab-btn" data-tab="panel-backup">
+          <span class="tab-icon">💾</span>
+          <span class="tab-label">ক্লাউড ও ব্যাকআপ</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="admin-main-container">
+
+      <!-- ==========================================
+           TAB 1: MOMENTS & VIDEOS
+           ========================================== -->
+      <section id="panel-moments" class="tab-panel active">
+        <div class="panel-header-banner">
+          <div class="banner-text">
+            <h3 class="banner-title">আমাদের সুন্দর মুহূর্ত ও ভিডিও সংগ্রহ</h3>
+            <p class="banner-subtitle">ওয়েবসাইটের "আমাদের সুন্দর মুহূর্তগুলো" সেকশনে নতুন ছবি বা ভিডিও যোগ করুন, সম্পাদনা করুন বা সাজান।</p>
+          </div>
+          <button type="button" id="btn-add-moment" class="primary-add-btn">
+            <span>+</span> <span>নতুন মুহূর্ত বা ভিডিও যোগ করুন</span>
+          </button>
+        </div>
+
+        <div class="moments-stats-row">
+          <div class="stat-card">
+            <span class="stat-icon">📁</span>
+            <div class="stat-info">
+              <span class="stat-number" id="stats-total-moments">0</span>
+              <span class="stat-title">মোট মুহূর্ত</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">🎥</span>
+            <div class="stat-info">
+              <span class="stat-number" id="stats-total-videos">0</span>
+              <span class="stat-title">ভিডিও স্মৃতি</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">📷</span>
+            <div class="stat-info">
+              <span class="stat-number" id="stats-total-photos">0</span>
+              <span class="stat-title">ছবি স্মৃতি</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Moments Cards Grid -->
+        <div id="moments-list-grid" class="cards-grid">
+          <!-- Populated by JavaScript -->
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 2: VINTAGE DIARY SPREADS
+           ========================================== -->
+      <section id="panel-diary" class="tab-panel">
+        <div class="panel-header-banner">
+          <div class="banner-text">
+            <h3 class="banner-title">ভিন্টেজ ডায়েরির অধ্যায় ও পাতা</h3>
+            <p class="banner-subtitle">ওয়েবসাইটের ওপেন ডায়েরি ৩ডি ফ্লিপ বইয়ের বিভিন্ন চ্যাপ্টার, লেখা ও স্ক্র্যাপবুক পাতার গল্পগুলো নিয়ন্ত্রণ করুন।</p>
+          </div>
+          <button type="button" id="btn-add-chapter" class="primary-add-btn">
+            <span>+</span> <span>নতুন অধ্যায় যোগ করুন</span>
+          </button>
+        </div>
+
+        <div id="diary-chapters-list" class="chapters-stack">
+          <!-- Populated by JavaScript -->
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 3: VIRTUAL DATES
+           ========================================== -->
+      <section id="panel-dates" class="tab-panel">
+        <div class="panel-header-banner">
+          <div class="banner-text">
+            <h3 class="banner-title">ভার্চুয়াল ডেটের ডিজিটাল রেকর্ড</h3>
+            <p class="banner-subtitle">মুভি ডেট এবং স্লিপিং ডেট সংখ্যা, ইতিহাস এবং তারিখ দ্রুত আপডেট করুন।</p>
+          </div>
+        </div>
+
+        <!-- Section: Movie Dates -->
+        <div class="sub-section-box">
+          <div class="sub-section-header">
+            <div class="header-sub-info">
+              <h4 class="sub-title">🍿 মুভি ডেটের তালিকা (<span id="count-movie-dates">0</span>টি মুভি)</h4>
+              <p class="sub-desc">একসাথে অনলাইনে স্ক্রিনশেয়ার করে দেখা মুভিগুলোর নাম ও তারিখ।</p>
+            </div>
+            <button type="button" id="btn-add-movie" class="secondary-add-btn">
+              <span>+</span> <span>নতুন মুভি যোগ করুন</span>
+            </button>
+          </div>
+          <div id="admin-movies-list" class="items-list-wrap">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Section: Sleeping Dates -->
+        <div class="sub-section-box">
+          <div class="sub-section-header">
+            <div class="header-sub-info">
+              <h4 class="sub-title">🌙 স্লিপিং ডেটের তালিকা (<span id="count-sleep-dates">0</span>টি স্লিপিং ডেট)</h4>
+              <p class="sub-desc">অন-কল ঘুমের তারিখগুলো। এক ক্লিকে পরবর্তী স্লিপিং ডেট যুক্ত করার সুবিধাসহ।</p>
+            </div>
+            <div class="sub-btn-group">
+              <button type="button" id="btn-quick-next-sleep" class="quick-action-btn" title="পূর্ববর্তী তারিখের ভিত্তিতে অটোমেটিক পরবর্তী স্লিপিং ডেট যোগ হবে">
+                <span>⚡</span> <span>পরবর্তী স্লিপিং ডেট যোগ করুন</span>
+              </button>
+              <button type="button" id="btn-add-sleep" class="secondary-add-btn">
+                <span>+</span> <span>কাস্টম ডেট যোগ করুন</span>
+              </button>
+            </div>
+          </div>
+          <div id="admin-sleep-list" class="items-list-wrap">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 4: DREAMS JOURNAL
+           ========================================== -->
+      <section id="panel-dreams" class="tab-panel">
+        <div class="panel-header-banner">
+          <div class="banner-text">
+            <h3 class="banner-title">স্বপ্নজালের ডায়েরি (স্বপ্নের স্মৃতি)</h3>
+            <p class="banner-subtitle">Partner এবং Picchi-র ঘুমের রাজ্যে দেখা রূপকথার মতো মিষ্টি স্বপ্নগুলোর তালিকা পরিচালনা করুন।</p>
+          </div>
+          <button type="button" id="btn-add-dream" class="primary-add-btn">
+            <span>+</span> <span>নতুন স্বপ্ন যোগ করুন</span>
+          </button>
+        </div>
+
+        <!-- Person Selector Tabs -->
+        <div class="dreams-person-switcher">
+          <button type="button" class="person-tab-btn active" data-person="partner">
+            <span class="person-tab-icon">🌙</span>
+            <span class="person-tab-name">Partner-এর স্বপ্ন</span>
+            <span class="person-tab-count" id="count-partner-dreams">0</span>
+          </button>
+          <button type="button" class="person-tab-btn" data-person="picchi">
+            <span class="person-tab-icon">🌸</span>
+            <span class="person-tab-name">Picchi-র স্বপ্ন</span>
+            <span class="person-tab-count" id="count-picchi-dreams">0</span>
+          </button>
+        </div>
+
+        <div id="admin-dreams-list" class="dreams-stack">
+          <!-- Populated by JavaScript -->
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 5: PROFILE & SETTINGS
+           ========================================== -->
+      <section id="panel-profile" class="tab-panel">
+        <div class="panel-header-banner">
+          <div class="banner-text">
+            <h3 class="banner-title">প্রোফাইল, তারিখ ও নিরাপত্তা সেটিংস</h3>
+            <p class="banner-subtitle">নাম, শুরুর তারিখ, ব্র্যান্ডিং টেক্সট এবং অ্যাডমিন পিন কোড পরিবর্তন করুন।</p>
+          </div>
+          <button type="button" id="btn-save-profile" class="primary-add-btn">
+            <span>💾</span> <span>প্রোফাইল সেভ করুন</span>
+          </button>
+        </div>
+
+        <div class="settings-grid">
+          <!-- Core Names & Brand Card -->
+          <div class="settings-card">
+            <h4 class="card-heading">👤 নাম ও ব্র্যান্ডিং</h4>
+            <div class="form-group">
+              <label for="set-person1">১ম ব্যক্তির নাম (Person 1):</label>
+              <input type="text" id="set-person1" class="admin-input" placeholder="Partner" />
+            </div>
+            <div class="form-group">
+              <label for="set-person2">২য় ব্যক্তির নাম (Person 2):</label>
+              <input type="text" id="set-person2" class="admin-input" placeholder="Picchi" />
+            </div>
+            <div class="form-group">
+              <label for="set-brand-title">ওয়েবসাইটের ব্র্যান্ড টাইটেল:</label>
+              <input type="text" id="set-brand-title" class="admin-input" placeholder="Partner&Picchi Diaries" />
+            </div>
+            <div class="form-group">
+              <label for="set-subheadline">সাব-শিরোনাম (Hero Subheadline):</label>
+              <textarea id="set-subheadline" class="admin-textarea" rows="2" placeholder="একটি নির্ভেজাল বন্ধুত্বের গল্প..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="set-closing-quote">ফুটার উক্তি (Closing Quote):</label>
+              <textarea id="set-closing-quote" class="admin-textarea" rows="3" placeholder="কিছু সম্পর্কের কোনো ব্যাখ্যার প্রয়োজন হয় না..."></textarea>
+            </div>
+          </div>
+
+          <!-- Start Date & Security Card -->
+          <div class="settings-card">
+            <h4 class="card-heading">🗓️ বন্ধুত্বের শুরু ও লাইভ কাউন্টার</h4>
+            <div class="form-group">
+              <label for="set-start-date">বন্ধুত্ব শুরুর তারিখ ও সময়:</label>
+              <input type="datetime-local" id="set-start-date" class="admin-input" />
+              <small class="field-hint">এই তারিখ থেকে লাইভ কাউন্টার দিন, ঘণ্টা, মিনিট ও সেকেন্ড গণনা করে।</small>
+            </div>
+            <div class="form-group">
+              <label for="set-start-date-formatted">তারিখের বাংলা রূপ:</label>
+              <input type="text" id="set-start-date-formatted" class="admin-input" placeholder="৯ আগস্ট ২০২৬ (রবিবার)" />
+            </div>
+
+            <hr class="card-divider" />
+
+            <h4 class="card-heading">🔐 অ্যাডমিন পিন কোড পরিবর্তন</h4>
+            <div class="form-group">
+              <label for="pin-change-current">বর্তমান পিন:</label>
+              <input type="password" id="pin-change-current" class="admin-input" placeholder="বর্তমান পিন দিন" maxlength="8" />
+            </div>
+            <div class="form-group">
+              <label for="pin-change-new">নতুন পিন (৪ থেকে ৮ ডিজিট):</label>
+              <input type="password" id="pin-change-new" class="admin-input" placeholder="নতুন পিন দিন" maxlength="8" />
+            </div>
+            <div class="form-group">
+              <label for="pin-change-confirm">নতুন পিন নিশ্চিত করুন:</label>
+              <input type="password" id="pin-change-confirm" class="admin-input" placeholder="পুনরায় নতুন পিন দিন" maxlength="8" />
+            </div>
+            <button type="button" id="btn-update-pin" class="secondary-add-btn">
+              <span>🔒</span> <span>পিন কোড আপডেট করুন</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 6: CLOUD, BACKUP & RESTORE
+           ========================================== -->
+      <section id="panel-backup" class="tab-panel">
+        <div class="panel-header-banner">
+          <div class="banner-text">
+            <h3 class="banner-title">ক্লাউড সিঙ্ক ও ডেটা ব্যাকআপ</h3>
+            <p class="banner-subtitle">আপনার পুরো ওয়েবসাইটের সব স্মৃতি ও ডেটার সুরক্ষিত ব্যাকআপ ডাউনলোড ও ক্লাউড সিঙ্ক পরিচালনা করুন।</p>
+          </div>
+        </div>
+
+        <div class="backup-grid">
+          <!-- Cloud Status Card -->
+          <div class="backup-card">
+            <div class="card-badge-top">🟢 লাইভ ক্লাউড</div>
+            <h4 class="card-heading">☁️ Firebase Cloud Firestore</h4>
+            <p class="card-info-text">
+              Firebase ক্লাউড ডেটাবেস সক্রিয় থাকলে আপনার মোবাইল বা কম্পিউটার যেকোনো ডিভাইস থেকে তথ্য এন্ট্রি করলে উভয় ডিভাইসেই সাথে সাথে স্বয়ংক্রিয়ভাবে আপডেট হয়ে যাবে।
+            </p>
+            <div class="cloud-meta-box">
+              <div class="meta-row"><span>প্রজেক্ট আইডি:</span> <strong>partner-picchi-diaries</strong></div>
+              <div class="meta-row"><span>ডকুমেন্ট:</span> <code>diaries/main</code></div>
+              <div class="meta-row"><span>অবস্থা:</span> <span id="cloud-sync-status-label" class="status-online">কানেক্টেড</span></div>
+            </div>
+            <button type="button" id="btn-force-cloud-sync" class="primary-add-btn" style="width: 100%; justify-content: center;">
+              <span>⚡</span> <span>এখনই ক্লাউডে সেভ ও লাইভ করুন</span>
+            </button>
+          </div>
+
+          <!-- JSON Backup & Restore Card -->
+          <div class="backup-card">
+            <div class="card-badge-top">📦 ব্যাকআপ ফাইল</div>
+            <h4 class="card-heading">📥 অফলাইন JSON ব্যাকআপ ও রিস্টোর</h4>
+            <p class="card-info-text">
+              আপনার সমস্ত মুহূর্ত, ভিডিও, ডায়েরির গল্প, মুভি এবং সেটিংস একটি সিঙ্গেল ব্যাকআপ ফাইলে ডাউনলোড করে সংরক্ষণ করতে পারেন।
+            </p>
+            <div class="backup-btn-stack">
+              <button type="button" id="btn-download-backup" class="secondary-add-btn">
+                <span>⬇️</span> <span>ব্যাকআপ ডাউনলোড করুন (JSON)</span>
+              </button>
+              
+              <label class="file-upload-label secondary-add-btn" for="input-restore-backup">
+                <span>⬆️</span> <span>ব্যাকআপ ফাইল থেকে রিস্টোর করুন</span>
+                <input type="file" id="input-restore-backup" accept=".json" style="display: none;" />
+              </label>
+            </div>
+
+            <hr class="card-divider" />
+
+            <h4 class="card-heading text-danger">⚠️ ফ্যাক্টরি রিসেট</h4>
+            <p class="card-info-text">যদি কখনো সমস্ত কাস্টম ডেটা মুছে ওয়েবসাইটের আসল ডিফল্ট অবস্থায় ফিরিয়ে নিতে চান:</p>
+            <button type="button" id="btn-reset-defaults" class="btn-danger-outline">
+              <span>🔄</span> <span>আসল ডিফল্ট ডেটায় রিসেট করুন</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ==========================================
+       3. MODALS
+       ========================================== -->
+
+  <!-- Modal: Moment / Video Editor -->
+  <div id="modal-moment" class="admin-modal" aria-hidden="true" role="dialog">
+    <div class="modal-backdrop"></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="modal-moment-title" class="modal-title">নতুন মুহূর্ত বা ভিডিও যোগ করুন</h3>
+        <button type="button" class="modal-close-btn" data-close="modal-moment">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-moment">
+          <input type="hidden" id="moment-edit-index" value="-1" />
+          
+          <!-- Media Type Toggle -->
+          <div class="media-type-selector">
+            <label class="type-radio-label">
+              <input type="radio" name="moment-type" value="photo" checked />
+              <span class="type-pill">📷 ছবি (Photo)</span>
+            </label>
+            <label class="type-radio-label">
+              <input type="radio" name="moment-type" value="video" />
+              <span class="type-pill">🎥 ভিডিও (Video)</span>
+            </label>
+          </div>
+
+          <!-- Video Options (Shown only when Video is selected) -->
+          <div id="video-fields-group" class="dynamic-group" style="display: none;">
+            <div class="form-group">
+              <label for="moment-video-source">ভিডিও সোর্স (লিঙ্ক অথবা ফাইল):</label>
+              <div class="input-with-upload">
+                <input type="text" id="moment-video-url" class="admin-input" placeholder="ইউটিউব / ড্রাইভ লিঙ্ক অথবা সরাসরি MP4 URL..." />
+                <label class="upload-btn" title="ডিভাইস থেকে ভিডিও ফাইল বাছাই করুন">
+                  <span>📁 আপলোড</span>
+                  <input type="file" id="moment-video-file" accept="video/mp4,video/webm,video/quicktime" style="display: none;" />
+                </label>
+              </div>
+              <small class="field-hint">💡 ইউটিউব লিঙ্ক, গুগল ড্রাইভ প্রিভিউ লিঙ্ক, কিংবা ছোট এমপি৪ ফাইল আপলোড করতে পারবেন।</small>
+            </div>
+
+            <!-- Video File Status / Preview Note -->
+            <div id="video-file-status" class="file-status-badge" style="display: none;"></div>
+
+            <div class="form-group">
+              <label for="moment-poster-url">ভিডিও পোস্টার / থাম্বনেইল ছবি (ঐচ্ছিক):</label>
+              <div class="input-with-upload">
+                <input type="text" id="moment-poster-url" class="admin-input" placeholder="assets/my-thumbnail.png বা ইমেজ URL..." />
+                <label class="upload-btn" title="ডিভাইস থেকে ছবি বাছাই করুন">
+                  <span>🖼️ আপলোড</span>
+                  <input type="file" id="moment-poster-file" accept="image/*" style="display: none;" />
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Photo Options (Shown only when Photo is selected) -->
+          <div id="photo-fields-group" class="dynamic-group">
+            <div class="form-group">
+              <label for="moment-image-url">ছবির পাথ বা URL:</label>
+              <div class="input-with-upload">
+                <input type="text" id="moment-image-url" class="admin-input" placeholder="assets/chat-story-1.png বা ওয়েব লিঙ্ক..." />
+                <label class="upload-btn" title="ডিভাইস থেকে ছবি বাছাই করুন">
+                  <span>🖼️ আপলোড</span>
+                  <input type="file" id="moment-image-file" accept="image/*" style="display: none;" />
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="moment-title">স্মৃতির শিরোনাম:</label>
+              <input type="text" id="moment-title" class="admin-input" placeholder="যেমন: প্রথম আলাপ ও স্নিগ্ধ হাসি" required />
+            </div>
+            <div class="form-group">
+              <label for="moment-date-tag">তারিখ / সময়:</label>
+              <input type="text" id="moment-date-tag" class="admin-input" placeholder="যেমন: ৯ আগস্ট ২০২৬ • সকাল ০৭:৫২" />
+            </div>
+          </div>
+
+          <div class="form-row-3">
+            <div class="form-group">
+              <label for="moment-sender">প্রেরক (Sender):</label>
+              <input type="text" id="moment-sender" class="admin-input" placeholder="Partner & Picchi" />
+            </div>
+            <div class="form-group">
+              <label for="moment-tag">ট্যাগ (Tag):</label>
+              <input type="text" id="moment-tag" class="admin-input" placeholder="প্রথম আলাপ / ভিডিও মেমোরি" />
+            </div>
+            <div class="form-group">
+              <label for="moment-reaction">রিঅ্যাকশন ইমোজি:</label>
+              <input type="text" id="moment-reaction" class="admin-input" placeholder="❤️" maxlength="6" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="moment-quote">হাইলাইটেড উক্তি / সংলাপ (ঐচ্ছিক):</label>
+            <input type="text" id="moment-quote" class="admin-input" placeholder="যেমন: 'Hi, Mahib! - sorry bangla ektu kom parbo...'" />
+          </div>
+
+          <div class="form-group">
+            <label for="moment-caption">ক্যাপশন / বর্ণনা:</label>
+            <textarea id="moment-caption" class="admin-textarea" rows="3" placeholder="স্মৃতিটির পেছনে থাকা সুন্দর অনুভূতি..."></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" data-close="modal-moment">বাতিল</button>
+        <button type="button" id="btn-save-moment" class="primary-add-btn">
+          <span>💾</span> <span>সংরক্ষণ করুন</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Movie Date Editor -->
+  <div id="modal-movie" class="admin-modal" aria-hidden="true" role="dialog">
+    <div class="modal-backdrop"></div>
+    <div class="modal-dialog modal-dialog-sm">
+      <div class="modal-header">
+        <h3 id="modal-movie-title" class="modal-title">নতুন মুভি ডেট যোগ করুন</h3>
+        <button type="button" class="modal-close-btn" data-close="modal-movie">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-movie">
+          <input type="hidden" id="movie-edit-index" value="-1" />
+          <div class="form-group">
+            <label for="movie-name">মুভির নাম:</label>
+            <input type="text" id="movie-name" class="admin-input" placeholder="যেমন: Jailer 2" required />
+          </div>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="movie-order">ক্রম (অর্ডার):</label>
+              <input type="text" id="movie-order" class="admin-input" placeholder="১০ম / ১১তম..." />
+            </div>
+            <div class="form-group">
+              <label for="movie-icon">আইকন ইমোজি:</label>
+              <input type="text" id="movie-icon" class="admin-input" placeholder="🎬" maxlength="6" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="movie-date">দেখার তারিখ (ঐচ্ছিক):</label>
+            <input type="text" id="movie-date" class="admin-input" placeholder="যেমন: ১৭ অক্টোবর ২০২৬" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" data-close="modal-movie">বাতিল</button>
+        <button type="button" id="btn-save-movie" class="primary-add-btn">
+          <span>💾</span> <span>সংরক্ষণ করুন</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Sleeping Date Editor -->
+  <div id="modal-sleep" class="admin-modal" aria-hidden="true" role="dialog">
+    <div class="modal-backdrop"></div>
+    <div class="modal-dialog modal-dialog-sm">
+      <div class="modal-header">
+        <h3 id="modal-sleep-title" class="modal-title">স্লিপিং ডেট যোগ / সম্পাদনা</h3>
+        <button type="button" class="modal-close-btn" data-close="modal-sleep">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-sleep">
+          <input type="hidden" id="sleep-edit-index" value="-1" />
+          <div class="form-group">
+            <label for="sleep-title">তারিখ বা শিরোনাম:</label>
+            <input type="text" id="sleep-title" class="admin-input" placeholder="যেমন: ১৭ অক্টোবর ২০২৬" required />
+          </div>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="sleep-order">ক্রম (অর্ডার):</label>
+              <input type="text" id="sleep-order" class="admin-input" placeholder="৩২তম / ৩৩তম..." />
+            </div>
+            <div class="form-group">
+              <label for="sleep-date">নোট / সাবটাইটেল:</label>
+              <input type="text" id="sleep-date" class="admin-input" placeholder="অন-কল ঘুম 💤" />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" data-close="modal-sleep">বাতিল</button>
+        <button type="button" id="btn-save-sleep" class="primary-add-btn">
+          <span>💾</span> <span>সংরক্ষণ করুন</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Dream Editor -->
+  <div id="modal-dream" class="admin-modal" aria-hidden="true" role="dialog">
+    <div class="modal-backdrop"></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="modal-dream-title" class="modal-title">নতুন স্বপ্ন যোগ করুন</h3>
+        <button type="button" class="modal-close-btn" data-close="modal-dream">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-dream">
+          <input type="hidden" id="dream-edit-index" value="-1" />
+          <div class="form-group">
+            <label for="dream-target-person">কার স্বপ্ন:</label>
+            <select id="dream-target-person" class="admin-input">
+              <option value="partner">Partner-এর স্বপ্ন 🌙</option>
+              <option value="picchi">Picchi-র স্বপ্ন 🌸</option>
+            </select>
+          </div>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="dream-date">স্বপ্নের তারিখ:</label>
+              <input type="text" id="dream-date" class="admin-input" placeholder="যেমন: ৯ আগস্ট ২০২৬" required />
+            </div>
+            <div class="form-group">
+              <label for="dream-title">স্বপ্নের শিরোনাম:</label>
+              <input type="text" id="dream-title" class="admin-input" placeholder="যেমন: পাহাড়ের চূড়ায় দুজনের কফি খাওয়া" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="dream-full-text">স্বপ্নের পুরো বিবরণ:</label>
+            <textarea id="dream-full-text" class="admin-textarea" rows="4" placeholder="ঘুমের মধ্যে দেখা রূপকথার মতো গল্পটি লিখুন..." required></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" data-close="modal-dream">বাতিল</button>
+        <button type="button" id="btn-save-dream" class="primary-add-btn">
+          <span>💾</span> <span>সংরক্ষণ করুন</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Universal Confirmation Dialog -->
+  <div id="modal-confirm" class="admin-modal" aria-hidden="true" role="dialog">
+    <div class="modal-backdrop"></div>
+    <div class="modal-dialog modal-dialog-sm">
+      <div class="modal-header">
+        <h3 id="confirm-title" class="modal-title">নিশ্চিত করুন</h3>
+        <button type="button" class="modal-close-btn" data-close="modal-confirm">✕</button>
+      </div>
+      <div class="modal-body">
+        <p id="confirm-message" class="confirm-text">আপনি কি নিশ্চিত যে এটি মুছে ফেলতে চান?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" data-close="modal-confirm">না, বাতিল</button>
+        <button type="button" id="btn-confirm-action" class="primary-add-btn btn-danger-action">
+          <span>🗑️</span> <span>হ্যাঁ, নিশ্চিত</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Box -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore-compat.js"></script>
+  <script src="script.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

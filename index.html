@@ -318,7 +318,7 @@
                 <div class="movies-showcase-title">
                   <span>🍿 একসাথে দেখা ১০টি মুভি:</span>
                 </div>
-                <div class="movies-list">
+                <div class="movies-list" id="movies-list">
                   <div class="movie-item">
                     <span class="movie-order">১ম</span>
                     <span class="movie-pill-name">💥 Blast</span>
@@ -1000,6 +1000,13 @@
         স্নেহ ও ভালোবাসায় নির্মিত <span class="heart-pulse">❤️</span> <strong id="footer-names">Partner&amp;Picchi Diaries</strong> • অনন্তকাল ধরে
       </p>
 
+      <div class="footer-admin-wrap">
+        <a href="admin.html" class="admin-panel-link" title="অ্যাডমিন ড্যাশবোর্ড">
+          <span class="admin-icon">⚙️</span>
+          <span class="admin-link-text">অ্যাডমিন ড্যাশবোর্ড</span>
+        </a>
+      </div>
+
       <a href="#hero" class="back-to-top" aria-label="Back to top">
         <span>↑</span>
       </a>
@@ -1018,6 +1025,8 @@
       </div>
       <div class="lightbox-body">
         <img id="lightbox-img" src="" alt="Screenshot Preview" class="lightbox-full-img" />
+        <video id="lightbox-video" class="lightbox-full-video" controls playsinline style="display: none;"></video>
+        <iframe id="lightbox-iframe" class="lightbox-full-iframe" style="display: none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
       <p id="lightbox-caption" class="lightbox-caption"></p>
     </div>
@@ -1094,6 +1103,10 @@
     </button>
   </aside>
 
+    <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore-compat.js"></script>
   <script src="script.js"></script>
   <script src="cert.js" defer></script>
 </body>

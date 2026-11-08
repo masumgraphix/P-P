@@ -525,6 +525,84 @@ const STORY_CONFIG = {
   }
 };
 
+// ============================================================================
+// FIREBASE CLOUD CONFIGURATION & REALTIME SYNC
+// ============================================================================
+window.STORY_CONFIG = STORY_CONFIG;
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyAy8_8wsBQwZYYxKOM58mOtsG3fZmNa4as",
+  authDomain: "partner-picchi-diaries.firebaseapp.com",
+  projectId: "partner-picchi-diaries",
+  storageBucket: "partner-picchi-diaries.firebasestorage.app",
+  messagingSenderId: "608879370571",
+  appId: "1:608879370571:web:cf2bfb6d68deca8b9a08ce"
+};
+
+// Bengali Number & Ordinal Converters
+function toBengaliNum(num) {
+  if (num === null || num === undefined) return '';
+  const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+  return String(num).replace(/[0-9]/g, (d) => bnDigits[d]);
+}
+
+function toBengaliOrdinal(num) {
+  const ordinals = {
+    1: "১ম", 2: "২য়", 3: "৩য়", 4: "৪র্থ", 5: "৫ম",
+    6: "৬ষ্ঠ", 7: "৭ম", 8: "৮ম", 9: "৯ম", 10: "১০ম",
+    11: "১১তম", 12: "১২তম", 13: "১৩তম", 14: "১৪তম", 15: "১৫তম",
+    16: "১৬তম", 17: "১৭তম", 18: "১৮তম", 19: "১৯তম", 20: "২০তম",
+    21: "২১তম", 22: "২২তম", 23: "২৩তম", 24: "২৪তম", 25: "২৫তম",
+    26: "২৬তম", 27: "২৭তম", 28: "২৮তম", 29: "২৯তম", 30: "৩০তম",
+    31: "৩১তম", 32: "৩২তম", 33: "৩৩তম", 34: "৩৪তম", 35: "৩৫তম",
+    36: "৩৬তম", 37: "৩৭তম", 38: "৩৮তম", 39: "৩৯তম", 40: "৪০তম",
+    41: "৪১তম", 42: "৪২তম", 43: "৪৩তম", 44: "৪৪তম", 45: "৪৫তম",
+    46: "৪৬তম", 47: "৪৭তম", 48: "৪৮তম", 49: "৪৯তম", 50: "৫০তম"
+  };
+  return ordinals[num] || `${toBengaliNum(num)}তম`;
+}
+
+// Video Embed URL Parser
+window.FIREBASE_CONFIG = FIREBASE_CONFIG;
+window.toBengaliNum = toBengaliNum;
+window.toBengaliOrdinal = toBengaliOrdinal;
+window.formatVideoEmbed = formatVideoEmbed;
+
+function formatVideoEmbed(url) {
+  if (!url) return { type: 'none', url: '' };
+  url = String(url).trim();
+  // YouTube
+  const ytMatch = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+  if (ytMatch) {
+    return { type: 'iframe', url: `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1&rel=0` };
+  }
+  // Google Drive
+  const driveMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (driveMatch) {
+    return { type: 'iframe', url: `https://drive.google.com/file/d/${driveMatch[1]}/preview` };
+  }
+  // Vimeo
+  const vimeoMatch = url.match(/vimeo\.com\/(\d+)/);
+  if (vimeoMatch) {
+    return { type: 'iframe', url: `https://player.vimeo.com/video/${vimeoMatch[1]}?autoplay=1` };
+  }
+  // Direct video file or data/blob URL
+  return { type: 'video', url: url };
+}
+
+// Immediate LocalStorage override before DOM render
+try {
+  const savedCfg = localStorage.getItem("P_P_CUSTOM_CONFIG");
+  if (savedCfg) {
+    const parsed = JSON.parse(savedCfg);
+    Object.keys(parsed).forEach(k => {
+      STORY_CONFIG[k] = parsed[k];
+    });
+  }
+} catch (e) {
+  console.warn("Local config parse error:", e);
+}
+
+
 /**
  * ============================================================================
  * 3D SOFT CARTOON SLEEPING CHARACTERS (PIXAR / SOFT-TOY AESTHETIC)
@@ -779,6 +857,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initStoryDiary();
   initMomentsCarousel();
   initScreenshotLightbox();
+  renderVirtualDates();
   initDreamPage();
   initVibeStats();
   initScrollAnimations();
@@ -1149,7 +1228,53 @@ function initMomentsCarousel() {
     const card = document.createElement("div");
     card.className = "messenger-card glass-card";
 
-    if (mem.image) {
+    const isVideo = mem.type === "video" || !!mem.video;
+
+    if (isVideo) {
+      const mediaHtml = mem.image
+        ? `<img src="${mem.image}" alt="${mem.title || 'Video Memory'}" class="messenger-screenshot-img" loading="eager" decoding="async" />`
+        : `<div class="video-thumbnail-placeholder">
+             <span class="video-placeholder-label">ভিডিওটি দেখতে ক্লিক করুন</span>
+           </div>`;
+
+      card.innerHTML = `
+        <div class="messenger-header">
+          <div class="messenger-avatar">${mem.avatarLetter || 'P'}</div>
+          <div class="messenger-user-info">
+            <span class="messenger-name">${mem.sender || 'Partner & Picchi'}</span>
+            <span class="messenger-status">${mem.status || 'ভিডিও স্মৃতি • প্লে করুন'}</span>
+          </div>
+          ${mem.tag ? `<span class="messenger-topic-tag">${mem.tag}</span>` : ''}
+        </div>
+        
+        <div class="messenger-screenshot-frame is-video-frame" title="ভিডিওটি বড় করে দেখতে ক্লিক করুন">
+          <span class="video-badge-pill">🎥 ভিডিও স্মৃতি</span>
+          ${mediaHtml}
+          <div class="video-play-center-btn" aria-hidden="true">
+            <span class="play-icon-triangle">▶</span>
+          </div>
+          <div class="chat-reaction-badge" title="Reacted">${mem.reaction || '❤️'}</div>
+        </div>
+
+        <div class="messenger-content-area">
+          <h4 class="messenger-memory-title">${mem.title || 'আমাদের সুন্দর মুহূর্ত'}</h4>
+          ${mem.quote ? `<div class="messenger-quote-bubble">"${mem.quote}"</div>` : ''}
+          <div class="messenger-caption-area">
+            <p class="messenger-caption">"${mem.caption || ''}"</p>
+            <div class="messenger-date-tag">
+              <span>🗓️</span> ${mem.dateTag || ''}
+            </div>
+          </div>
+        </div>
+      `;
+
+      const frame = card.querySelector(".messenger-screenshot-frame");
+      if (frame) {
+        frame.addEventListener("click", () => {
+          openScreenshotLightbox(mem);
+        });
+      }
+    } else if (mem.image) {
       card.innerHTML = `
         <div class="messenger-header">
           <div class="messenger-avatar">${mem.avatarLetter || 'M'}</div>
@@ -1293,6 +1418,18 @@ function initScreenshotLightbox() {
     modal.classList.remove("active");
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
+
+    const videoEl = document.getElementById("lightbox-video");
+    const iframeEl = document.getElementById("lightbox-iframe");
+    if (videoEl) {
+      videoEl.pause();
+      videoEl.removeAttribute("src");
+      videoEl.style.display = "none";
+    }
+    if (iframeEl) {
+      iframeEl.removeAttribute("src");
+      iframeEl.style.display = "none";
+    }
   }
 
   if (closeBtn) closeBtn.addEventListener("click", closeModal);
@@ -1310,12 +1447,56 @@ function openScreenshotLightbox(mem) {
   const titleEl = document.getElementById("lightbox-title");
   const dateEl = document.getElementById("lightbox-date");
   const imgEl = document.getElementById("lightbox-img");
+  const videoEl = document.getElementById("lightbox-video");
+  const iframeEl = document.getElementById("lightbox-iframe");
   const captionEl = document.getElementById("lightbox-caption");
 
-  if (!modal || !imgEl) return;
+  if (!modal) return;
 
-  imgEl.src = mem.image;
-  imgEl.alt = mem.title || "Chat Memory Screenshot";
+  const isVideo = mem.type === "video" || !!mem.video;
+
+  if (isVideo) {
+    if (imgEl) imgEl.style.display = "none";
+    const media = formatVideoEmbed(mem.video);
+
+    if (media.type === "iframe") {
+      if (videoEl) {
+        videoEl.pause();
+        videoEl.removeAttribute("src");
+        videoEl.style.display = "none";
+      }
+      if (iframeEl) {
+        iframeEl.src = media.url;
+        iframeEl.style.display = "block";
+      }
+    } else {
+      if (iframeEl) {
+        iframeEl.removeAttribute("src");
+        iframeEl.style.display = "none";
+      }
+      if (videoEl) {
+        videoEl.src = media.url;
+        videoEl.style.display = "block";
+        videoEl.play().catch(() => {});
+      }
+    }
+  } else {
+    if (videoEl) {
+      videoEl.pause();
+      videoEl.removeAttribute("src");
+      videoEl.style.display = "none";
+    }
+    if (iframeEl) {
+      iframeEl.removeAttribute("src");
+      iframeEl.style.display = "none";
+    }
+    if (imgEl) {
+      imgEl.src = mem.image || "";
+      imgEl.alt = mem.title || "Chat Memory Screenshot";
+      imgEl.style.display = "block";
+    }
+  }
+
   if (titleEl) titleEl.textContent = mem.title || "চ্যাট স্মৃতি";
   if (dateEl) dateEl.textContent = mem.dateTag || "";
   if (captionEl) captionEl.textContent = `"${mem.caption || mem.quote || ''}"`;
@@ -2708,3 +2889,140 @@ if (document.readyState === "loading") {
   initVintageVinylPlayer();
 }
 
+
+
+/**
+ * 4.2. Dynamic Virtual Dates Renderer
+ */
+function renderVirtualDates() {
+  const vd = STORY_CONFIG.virtualDates;
+  if (!vd) return;
+
+  // 1. Total Dates Count
+  const totalCountEl = document.getElementById("total-dates-count");
+  if (totalCountEl) {
+    const total = vd.total || ((vd.movieDates?.movies?.length || 0) + (vd.sleepingDates?.history?.length || 0) + 1);
+    totalCountEl.textContent = `${toBengaliNum(total)} বার`;
+  }
+
+  // 2. Summary stats pills
+  const movieCount = vd.movieDates?.movies?.length || vd.movieDates?.count || 0;
+  const sleepCount = vd.sleepingDates?.history?.length || vd.sleepingDates?.count || 0;
+
+  const statNumbers = document.querySelectorAll(".dates-summary-stats .summary-stat-pill .stat-number");
+  if (statNumbers.length >= 3) {
+    statNumbers[1].textContent = `${toBengaliNum(movieCount)} বার`;
+    statNumbers[2].textContent = `${toBengaliNum(sleepCount)} বার`;
+  }
+
+  // 3. Movie card badges & title
+  const movieBadge = document.querySelector(".date-count-badge.badge-movie span:last-child");
+  if (movieBadge) movieBadge.textContent = `${toBengaliNum(movieCount)} বার সম্পন্ন`;
+
+  const movieShowcaseTitle = document.querySelector(".movies-showcase-title span");
+  if (movieShowcaseTitle) movieShowcaseTitle.textContent = `🍿 একসাথে দেখা ${toBengaliNum(movieCount)}টি মুভি:`;
+
+  // 4. Populate Movies List
+  const moviesListEl = document.getElementById("movies-list");
+  if (moviesListEl && vd.movieDates?.movies) {
+    moviesListEl.innerHTML = "";
+    vd.movieDates.movies.forEach((m, idx) => {
+      const order = m.order || toBengaliOrdinal(idx + 1);
+      const icon = m.icon || "🎬";
+      const div = document.createElement("div");
+      if (m.date) {
+        div.className = "movie-item highlight-movie";
+        div.innerHTML = `
+          <div class="movie-info-group">
+            <span class="movie-order">${order}</span>
+            <span class="movie-pill-name">${icon} ${m.name}</span>
+          </div>
+          <span class="movie-date-tag">🗓️ ${m.date}</span>
+        `;
+      } else {
+        div.className = "movie-item";
+        div.innerHTML = `
+          <span class="movie-order">${order}</span>
+          <span class="movie-pill-name">${icon} ${m.name}</span>
+        `;
+      }
+      moviesListEl.appendChild(div);
+    });
+  }
+
+  // 5. Sleeping card badge
+  const sleepBadge = document.querySelector(".date-count-badge.badge-sleep span:last-child");
+  if (sleepBadge) sleepBadge.textContent = `${toBengaliNum(sleepCount)} বার সম্পন্ন`;
+
+  // 6. Populate Sleeping Dates List
+  const sleepListEl = document.getElementById("sleep-dates-list");
+  if (sleepListEl && vd.sleepingDates?.history) {
+    sleepListEl.innerHTML = "";
+    vd.sleepingDates.history.forEach((s, idx) => {
+      const order = s.order || toBengaliOrdinal(idx + 1);
+      const div = document.createElement("div");
+      const isHighlight = Boolean(s.date && s.date !== "পূর্বের স্মৃতি");
+      div.className = `sleep-item ${isHighlight ? "highlight-date" : ""}`;
+      div.innerHTML = `
+        <span class="sleep-order">${order}</span>
+        <div class="sleep-item-info">
+          <span class="sleep-item-title">${s.title}</span>
+          <span class="sleep-item-sub">${s.date ? `${s.date} 💤` : "পূর্বের স্মৃতি 💤"}</span>
+        </div>
+      `;
+      sleepListEl.appendChild(div);
+    });
+  }
+
+  // Re-bind see more toggle
+  initSleepingDatesToggle();
+}
+
+/**
+ * 8. REALTIME LIVE SYNC & BROADCAST LISTENER
+ */
+function applyLiveConfigUpdates(newConfig) {
+  if (newConfig) {
+    Object.keys(newConfig).forEach(k => {
+      STORY_CONFIG[k] = newConfig[k];
+    });
+  }
+  initContent();
+  initStoryDiary();
+  initMomentsCarousel();
+  renderVirtualDates();
+  initDreamPage();
+}
+
+// BroadcastChannel for instant same-browser cross-tab sync
+if (typeof BroadcastChannel !== "undefined") {
+  const channel = new BroadcastChannel("p_p_diaries_channel");
+  channel.onmessage = (e) => {
+    if (e.data && e.data.type === "CONFIG_UPDATED") {
+      applyLiveConfigUpdates(e.data.config);
+    }
+  };
+}
+
+// Cloud Firestore Realtime Sync Listener
+if (typeof firebase !== "undefined" && firebase.firestore) {
+  try {
+    if (!firebase.apps.length) {
+      firebase.initializeApp(FIREBASE_CONFIG);
+    }
+    const db = firebase.firestore();
+    db.collection("diaries").doc("main").onSnapshot((doc) => {
+      if (doc.exists) {
+        const cloudData = doc.data();
+        applyLiveConfigUpdates(cloudData);
+        try {
+          localStorage.setItem("P_P_CUSTOM_CONFIG", JSON.stringify(cloudData));
+        } catch (_) {}
+      }
+    }, (err) => {
+      console.info("Firestore live listener note (offline/fallback mode active):", err.message);
+    });
+  } catch (err) {
+    console.warn("Firebase live init note:", err);
+  }
+}
