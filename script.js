@@ -1468,11 +1468,21 @@ function initScreenshotLightbox() {
     if (videoEl) {
       videoEl.pause();
       videoEl.removeAttribute("src");
+      videoEl.load();
       videoEl.style.display = "none";
     }
     if (iframeEl) {
       iframeEl.removeAttribute("src");
       iframeEl.style.display = "none";
+    }
+
+    // Resume background song if it was playing before opening video
+    if (window._wasBgMusicPlayingBeforeVideo) {
+      const bgAudio = document.getElementById("bg-music");
+      if (bgAudio && bgAudio.paused) {
+        bgAudio.play().catch(() => {});
+      }
+      window._wasBgMusicPlayingBeforeVideo = false;
     }
   }
 
@@ -1503,10 +1513,18 @@ function openScreenshotLightbox(mem) {
     if (imgEl) imgEl.style.display = "none";
     const media = formatVideoEmbed(mem.video);
 
+    // Pause background song while watching video
+    const bgAudio = document.getElementById("bg-music");
+    if (bgAudio && !bgAudio.paused) {
+      window._wasBgMusicPlayingBeforeVideo = true;
+      bgAudio.pause();
+    }
+
     if (media.type === "iframe") {
       if (videoEl) {
         videoEl.pause();
         videoEl.removeAttribute("src");
+        videoEl.load();
         videoEl.style.display = "none";
       }
       if (iframeEl) {
@@ -1528,6 +1546,7 @@ function openScreenshotLightbox(mem) {
     if (videoEl) {
       videoEl.pause();
       videoEl.removeAttribute("src");
+      videoEl.load();
       videoEl.style.display = "none";
     }
     if (iframeEl) {
