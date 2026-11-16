@@ -163,6 +163,9 @@
         if (parsed.virtualDates && (parsed.virtualDates.sleepingDates?.history?.length || 0) < (window.STORY_CONFIG?.virtualDates?.sleepingDates?.history?.length || 0)) {
           delete parsed.virtualDates;
         }
+        if (parsed.chatMemories && (parsed.chatMemories.length < (window.STORY_CONFIG?.chatMemories?.length || 0) || !parsed.chatMemories.some(m => m.type === "video"))) {
+          delete parsed.chatMemories;
+        }
         Object.assign(currentConfig, parsed);
       }
     } catch (e) {

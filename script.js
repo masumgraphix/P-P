@@ -157,6 +157,20 @@ const STORY_CONFIG = {
   // 4. Memorable Moments (Messenger Memories Carousel with Real Attached Screenshots)
   chatMemories: [
     {
+      type: "video",
+      video: "assets/video/gift-unboxing.mp4",
+      image: "assets/video/gift-unboxing-thumb.jpg",
+      sender: "Partner & Picchi",
+      avatarLetter: "P",
+      status: "ভিডিও স্মৃতি • প্লে করুন",
+      tag: "ভালোবাসার উপহার",
+      title: "ভালোবাসার চিঠি ও কাস্টম বুকমার্কের উপহার 💌✨",
+      quote: "আমার ডিজাইন করা বুকমার্ক আর চিঠি হাতে পেয়ে পিচ্চির মিষ্টি আনবক্সিং ভিডিও...",
+      caption: "পিচ্চির জন্য ভালোবাসার চিঠি আর নিজের হাতে ডিজাইন করা কাস্টম বুকমার্ক পাঠিয়েছিলাম। উপহারগুলো হাতে পেয়ে পিচ্চি পরম ভালোবাসায় এই ভিডিওটি করেছিল—আমাদের হৃদয়ের ভীষণ কাছের এক অবিস্মরণীয় মুহূর্ত!",
+      reaction: "💖",
+      dateTag: "ভালোবাসার উপহার • ভিডিও স্মৃতি"
+    },
+    {
       sender: "Partner & Picchi",
       avatarLetter: "P",
       status: "স্মৃতির শুরু • ৯ আগস্ট ২০২৬",
@@ -620,6 +634,9 @@ try {
     const parsed = JSON.parse(savedCfg);
     if (parsed.virtualDates && (parsed.virtualDates.sleepingDates?.history?.length || 0) < STORY_CONFIG.virtualDates.sleepingDates.history.length) {
       delete parsed.virtualDates;
+    }
+    if (parsed.chatMemories && (parsed.chatMemories.length < STORY_CONFIG.chatMemories.length || !parsed.chatMemories.some(m => m.type === "video"))) {
+      delete parsed.chatMemories;
     }
     Object.keys(parsed).forEach(k => {
       STORY_CONFIG[k] = parsed[k];
