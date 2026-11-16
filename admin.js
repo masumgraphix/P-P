@@ -149,9 +149,9 @@
     if (!currentConfig.picchiDreams) currentConfig.picchiDreams = [];
     if (!currentConfig.virtualDates) {
       currentConfig.virtualDates = {
-        total: 42,
+        total: 66,
         movieDates: { count: 10, movies: [] },
-        sleepingDates: { count: 31, history: [] }
+        sleepingDates: { count: 55, history: [] }
       };
     }
 
@@ -160,6 +160,9 @@
       const localCfg = localStorage.getItem("P_P_CUSTOM_CONFIG");
       if (localCfg) {
         const parsed = JSON.parse(localCfg);
+        if (parsed.virtualDates && (parsed.virtualDates.sleepingDates?.history?.length || 0) < (window.STORY_CONFIG?.virtualDates?.sleepingDates?.history?.length || 0)) {
+          delete parsed.virtualDates;
+        }
         Object.assign(currentConfig, parsed);
       }
     } catch (e) {

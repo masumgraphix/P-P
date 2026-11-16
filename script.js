@@ -292,7 +292,7 @@ const STORY_CONFIG = {
 
   // 5. Virtual Dates Breakdown (Our Special Online Dates)
   virtualDates: {
-    total: 42,
+    total: 66,
     movieDates: {
       count: 10,
       movies: [
@@ -309,7 +309,7 @@ const STORY_CONFIG = {
       ]
     },
     sleepingDates: {
-      count: 31,
+      count: 55,
       history: [
         { order: "১ম", title: "প্রথম স্লিপিং ডেট", date: null },
         { order: "২য়", title: "দ্বিতীয় স্লিপিং ডেট", date: null },
@@ -341,7 +341,31 @@ const STORY_CONFIG = {
         { order: "২৮তম", title: "অষ্টাবিংশ স্লিপিং ডেট", date: "১৩ অক্টোবর ২০২৬" },
         { order: "২৯তম", title: "ঊনত্রিংশ স্লিপিং ডেট", date: "১৪ অক্টোবর ২০২৬" },
         { order: "৩০তম", title: "ত্রিংশ স্লিপিং ডেট", date: "১৫ অক্টোবর ২০২৬" },
-        { order: "৩১তম", title: "একত্রিংশ স্লিপিং ডেট", date: "১৬ অক্টোবর ২০২৬", note: "আজকের অন-কল ঘুম 💖💤" }
+        { order: "৩১তম", title: "একত্রিংশ স্লিপিং ডেট", date: "১৬ অক্টোবর ২০২৬" },
+        { order: "৩২তম", title: "দ্বাত্রিংশ স্লিপিং ডেট", date: "১৭ অক্টোবর ২০২৬" },
+        { order: "৩৩তম", title: "ত্রয়োত্রিংশ স্লিপিং ডেট", date: "১৮ অক্টোবর ২০২৬" },
+        { order: "৩৪তম", title: "চতুস্ত্রিংশ স্লিপিং ডেট", date: "২৬ অক্টোবর ২০২৬" },
+        { order: "৩৫তম", title: "পঞ্চত্রিংশ স্লিপিং ডেট", date: "২৭ অক্টোবর ২০২৬" },
+        { order: "৩৬তম", title: "ষট্ত্রিংশ স্লিপিং ডেট", date: "২৮ অক্টোবর ২০২৬" },
+        { order: "৩৭তম", title: "সপ্তত্রিংশ স্লিপিং ডেট", date: "২৯ অক্টোবর ২০২৬" },
+        { order: "৩৮তম", title: "অষ্টাত্রিংশ স্লিপিং ডেট", date: "৩০ অক্টোবর ২০২৬" },
+        { order: "৩৯তম", title: "ঊনচত্বারিংশ স্লিপিং ডেট", date: "৩১ অক্টোবর ২০২৬" },
+        { order: "৪০তম", title: "চত্বারিংশ স্লিপিং ডেট", date: "১ নভেম্বর ২০২৬" },
+        { order: "৪১তম", title: "একচত্বারিংশ স্লিপিং ডেট", date: "২ নভেম্বর ২০২৬" },
+        { order: "৪২তম", title: "দ্বিচত্বারিংশ স্লিপিং ডেট", date: "৩ নভেম্বর ২০২৬" },
+        { order: "৪৩তম", title: "ত্রয়শ্চত্বারিংশ স্লিপিং ডেট", date: "৪ নভেম্বর ২০২৬" },
+        { order: "৪৪তম", title: "চতুশ্চত্বারিংশ স্লিপিং ডেট", date: "৫ নভেম্বর ২০২৬" },
+        { order: "৪৫তম", title: "পঞ্চচত্বারিংশ স্লিপিং ডেট", date: "৬ নভেম্বর ২০২৬" },
+        { order: "৪৬তম", title: "ষট্চত্বারিংশ স্লিপিং ডেট", date: "৭ নভেম্বর ২০২৬" },
+        { order: "৪৭তম", title: "সপ্তচত্বারিংশ স্লিপিং ডেট", date: "৮ নভেম্বর ২০২৬" },
+        { order: "৪৮তম", title: "অষ্টচত্বারিংশ স্লিপিং ডেট", date: "৯ নভেম্বর ২০২৬" },
+        { order: "৪৯তম", title: "ঊনপঞ্চাশত্তম স্লিপিং ডেট", date: "১০ নভেম্বর ২০২৬" },
+        { order: "৫০তম", title: "পঞ্চাশত্তম স্লিপিং ডেট", date: "১১ নভেম্বর ২০২৬" },
+        { order: "৫১তম", title: "একপঞ্চাশত্তম স্লিপিং ডেট", date: "১২ নভেম্বর ২০২৬" },
+        { order: "৫২তম", title: "দ্বিপঞ্চাশত্তম স্লিপিং ডেট", date: "১৩ নভেম্বর ২০২৬" },
+        { order: "৫৩তম", title: "ত্রিপঞ্চাশত্তম স্লিপিং ডেট", date: "১৪ নভেম্বর ২০২৬" },
+        { order: "৫৪তম", title: "চতুঃপঞ্চাশত্তম স্লিপিং ডেট", date: "১৫ নভেম্বর ২০২৬" },
+        { order: "৫৫তম", title: "পঞ্চপঞ্চাশত্তম স্লিপিং ডেট", date: "১৬ নভেম্বর ২০২৬", note: "আজকের অন-কল ঘুম 💖💤" }
       ],
       description: "ফোনের লাইনে একে অপরকে রেখে নিশ্চিন্ত ঘুম"
     },
@@ -556,7 +580,7 @@ function toBengaliOrdinal(num) {
     31: "৩১তম", 32: "৩২তম", 33: "৩৩তম", 34: "৩৪তম", 35: "৩৫তম",
     36: "৩৬তম", 37: "৩৭তম", 38: "৩৮তম", 39: "৩৯তম", 40: "৪০তম",
     41: "৪১তম", 42: "৪২তম", 43: "৪৩তম", 44: "৪৪তম", 45: "৪৫তম",
-    46: "৪৬তম", 47: "৪৭তম", 48: "৪৮তম", 49: "৪৯তম", 50: "৫০তম"
+    46: "৪৬তম", 47: "৪৭তম", 48: "৪৮তম", 49: "৪৯তম", 50: "৫০তম", 51: "৫১তম", 52: "৫২তম", 53: "৫৩তম", 54: "৫৪তম", 55: "৫৫তম", 56: "৫৬তম", 57: "৫৭তম", 58: "৫৮তম", 59: "৫৯তম", 60: "৬০তম"
   };
   return ordinals[num] || `${toBengaliNum(num)}তম`;
 }
@@ -594,6 +618,9 @@ try {
   const savedCfg = localStorage.getItem("P_P_CUSTOM_CONFIG");
   if (savedCfg) {
     const parsed = JSON.parse(savedCfg);
+    if (parsed.virtualDates && (parsed.virtualDates.sleepingDates?.history?.length || 0) < STORY_CONFIG.virtualDates.sleepingDates.history.length) {
+      delete parsed.virtualDates;
+    }
     Object.keys(parsed).forEach(k => {
       STORY_CONFIG[k] = parsed[k];
     });
@@ -1514,6 +1541,9 @@ function initSleepingDatesToggle() {
   const list = document.getElementById("sleep-dates-list");
   if (!toggleBtn || !list) return;
 
+  if (toggleBtn.dataset.hasListener === "true") return;
+  toggleBtn.dataset.hasListener = "true";
+
   const toggleText = toggleBtn.querySelector(".toggle-text");
 
   toggleBtn.addEventListener("click", () => {
@@ -1524,7 +1554,7 @@ function initSleepingDatesToggle() {
       if (toggleText) toggleText.textContent = "সংক্ষিপ্ত করুন";
     } else {
       const hiddenCount = list.querySelectorAll(".sleep-item-hidden").length;
-      if (toggleText) toggleText.textContent = `✨ আরও ${toBnNum(hiddenCount)}টি স্লিপিং ডেট দেখুন`;
+      if (toggleText) toggleText.textContent = `✨ আরও ${toBengaliNum(hiddenCount)}টি স্লিপিং ডেট দেখুন`;
       // Smoothly scroll back if user collapsed while scrolled deep
       const showcase = document.querySelector(".sleep-showcase");
       if (showcase) {
@@ -2962,16 +2992,32 @@ function renderVirtualDates() {
       const order = s.order || toBengaliOrdinal(idx + 1);
       const div = document.createElement("div");
       const isHighlight = Boolean(s.date && s.date !== "পূর্বের স্মৃতি");
-      div.className = `sleep-item ${isHighlight ? "highlight-date" : ""}`;
+      const isHidden = idx >= 14;
+      const isLatest = idx === vd.sleepingDates.history.length - 1;
+      div.className = `sleep-item ${isHighlight ? "highlight-date" : ""} ${isHidden ? "sleep-item-hidden" : ""} ${isLatest ? "latest-highlight" : ""}`;
+      if (isLatest) {
+        div.setAttribute("title", "আজকের অন-কল ঘুম");
+      }
       div.innerHTML = `
         <span class="sleep-order">${order}</span>
         <div class="sleep-item-info">
-          <span class="sleep-item-title">${s.title}</span>
-          <span class="sleep-item-sub">${s.date ? `${s.date} 💤` : "পূর্বের স্মৃতি 💤"}</span>
+          <span class="sleep-item-title">${s.date || s.title}</span>
+          <span class="sleep-item-sub">${s.date ? (isLatest ? "অন-কল ঘুম 💖💤" : "অন-কল ঘুম 💤") : "পূর্বের স্মৃতি 💤"}</span>
         </div>
       `;
       sleepListEl.appendChild(div);
     });
+  }
+
+  // Update showcase title & toggle button text
+  const sleepShowcaseTitle = document.querySelector(".sleep-showcase-title span");
+  if (sleepShowcaseTitle) sleepShowcaseTitle.textContent = `🌙 সম্পন্ন হওয়া ${toBengaliNum(sleepCount)}টি স্লিপিং ডেট:`;
+
+  const toggleBtn = document.getElementById("sleep-toggle-btn");
+  const toggleText = toggleBtn ? toggleBtn.querySelector(".toggle-text") : null;
+  const hiddenCount = Math.max(0, (vd.sleepingDates?.history?.length || 0) - 14);
+  if (toggleText && sleepListEl && !sleepListEl.classList.contains("is-expanded")) {
+    toggleText.textContent = `✨ আরও ${toBengaliNum(hiddenCount)}টি স্লিপিং ডেট দেখুন`;
   }
 
   // Re-bind see more toggle
